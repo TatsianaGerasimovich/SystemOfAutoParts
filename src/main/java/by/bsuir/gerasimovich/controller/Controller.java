@@ -45,11 +45,12 @@ public class Controller extends HttpServlet{
             rd.forward(request, response);
         } catch (ServletException ex) {
             log.error("servlet exception",ex);
+            ex.printStackTrace();
         } catch (IOException ex) {
             log.error("IO exception", ex);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (PersistException e) {
+            ex.printStackTrace();
+        }  catch (PersistException e) {
+            log.error("Exception in DAO", e);
             e.printStackTrace();
         }
     }

@@ -66,8 +66,11 @@ public class MySqlAutoPartDao extends AbstractJDBCDao<AutoPart> {
         return result;
     }
 
-    public int getNewId() throws PersistException, SQLException {
-        List<AutoPart> idCreate = this.getAll();
+    public int getNewId() throws PersistException {
+        List<AutoPart> idCreate = null;
+
+            idCreate = this.getAll();
+
         List<Integer> idCr = new ArrayList();
         for (AutoPart item : idCreate) {
             idCr.add(item.getId());

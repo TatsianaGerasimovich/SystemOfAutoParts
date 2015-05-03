@@ -24,7 +24,7 @@ public class OperationWithModel implements ICommand {
     MySqlCarModelDao mySqlCarModelDao;
     MySqlCarBrandDao mySqlCarBrandDao;
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws PersistException,SQLException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws PersistException {
         String page = null;
         String typeOfOperation = request.getParameter(RequestParameterName.TYPE_OF_OPERATION_WITH_MODEL);
 

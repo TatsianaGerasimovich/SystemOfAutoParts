@@ -21,7 +21,7 @@ public class ListOfAllByBrand implements ICommand {
     MySqlDaoFactory factory;
     MySqlSelectInAll mySqlSelectInAll;
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws PersistException,SQLException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws PersistException {
         String page = null;
         String filterType = request.getParameter(RequestParameterName.FILTER_TYPE);
         factory = new MySqlDaoFactory();

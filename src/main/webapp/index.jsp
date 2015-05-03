@@ -698,10 +698,10 @@
 </div>
 
 <div id="u158" class="ax_paragraph">
-    <a href="Controller?command=DO_LIST_OF_ALL_FILTER&filterType=VM"><img id="u158_img" class="img " src="jsp/accessories/images/index/u158.png"/>
+    <a href="Controller?command=DO_LIST_OF_ALL_FILTER&filterType=VW"><img id="u158_img" class="img " src="jsp/accessories/images/index/u158.png"/>
     </a>
     <div id="u159" class="text">
-        <p><a href="Controller?command=DO_LIST_OF_ALL_FILTER&filterType=VM"><span>VM</span></a></p>
+        <p><a href="Controller?command=DO_LIST_OF_ALL_FILTER&filterType=VW"><span>VW</span></a></p>
     </div>
 </div>
 

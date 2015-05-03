@@ -112,8 +112,8 @@ public class MySqlSelectInAll extends AbstractJDBCDao<SelectAll> {
             }
             try {
                 putConnection();
-            } catch (SQLException e) {
-
+            } catch (PersistException e) {
+                throw new  PersistException(e);
             }
         }
         return list;
@@ -143,12 +143,12 @@ public class MySqlSelectInAll extends AbstractJDBCDao<SelectAll> {
                 if (rs != null)
                     rs.close();
             } catch (SQLException e) {
-                //ignore
+                throw new  PersistException(e);
             }
             try {
                 putConnection();
-            } catch (SQLException e) {
-
+            } catch (PersistException e) {
+                throw new  PersistException(e);
             }
         }
         return list;
@@ -176,12 +176,12 @@ public class MySqlSelectInAll extends AbstractJDBCDao<SelectAll> {
                 if (rs != null)
                     rs.close();
             } catch (SQLException e) {
-                //ignore
+                throw new  PersistException(e);
             }
             try {
                 putConnection();
-            } catch (SQLException e) {
-
+            } catch (PersistException e) {
+                throw new  PersistException(e);
             }
         }
         return list;
@@ -202,12 +202,12 @@ public class MySqlSelectInAll extends AbstractJDBCDao<SelectAll> {
                 if (rs != null)
                     rs.close();
             } catch (SQLException e) {
-                //ignore
+                throw new  PersistException(e);
             }
             try {
                 putConnection();
-            } catch (SQLException e) {
-
+            } catch (PersistException e) {
+                throw new  PersistException(e);
             }
         }
         return list;

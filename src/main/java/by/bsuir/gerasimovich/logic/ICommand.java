@@ -7,5 +7,5 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 public interface ICommand {
-    public String execute(HttpServletRequest request, HttpServletResponse response)throws PersistException,SQLException;
+    public String execute(HttpServletRequest request, HttpServletResponse response)throws PersistException;
 }

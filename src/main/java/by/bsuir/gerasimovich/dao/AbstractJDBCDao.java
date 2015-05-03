@@ -54,7 +54,7 @@ public abstract class AbstractJDBCDao <T extends GeneralEntity> implements Gener
     protected abstract void prepareStatementForUpdate(PreparedStatement statement, T object) throws PersistException;
 
     @Override
-    public void persist(T object) throws PersistException, SQLException {
+    public void persist(T object) throws PersistException {
         // Добавляем запись
         String sql = getCreateQuery();
         connection = pool.getConnection();
@@ -72,13 +72,13 @@ public abstract class AbstractJDBCDao <T extends GeneralEntity> implements Gener
             if (connection != null)
                 pool.putConnection(connection);
         } catch (SQLException e) {
-
+            throw new PersistException(e);
         }
     }
 }
 
     @Override
-    public T getByPK(Integer key, String nameOfId) throws PersistException, SQLException {
+    public T getByPK(Integer key, String nameOfId) throws PersistException {
         List<T> list;
         String sql = getSelectQuery();
         ResultSet rs=null;
@@ -97,13 +97,13 @@ public abstract class AbstractJDBCDao <T extends GeneralEntity> implements Gener
                 if (rs != null)
                     rs.close();
             } catch (SQLException e) {
-                //ignore
+                throw new  PersistException(e);
             }
             try {
                 if (connection != null)
                     pool.putConnection(connection);
             } catch (SQLException e) {
-
+                throw new  PersistException(e);
             }
         }
         if (list == null || list.size() == 0) {
@@ -118,7 +118,7 @@ public abstract class AbstractJDBCDao <T extends GeneralEntity> implements Gener
     }
 
     @Override
-    public void update(T object) throws PersistException, SQLException {
+    public void update(T object) throws PersistException {
         String sql = getUpdateQuery();
         connection = pool.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(sql);) {
@@ -135,13 +135,13 @@ public abstract class AbstractJDBCDao <T extends GeneralEntity> implements Gener
                 if (connection != null)
                     pool.putConnection(connection);
             } catch (SQLException e) {
-
+                throw new  PersistException(e);
             }
         }
     }
 
     @Override
-    public void delete(T object) throws PersistException, SQLException {
+    public void delete(T object) throws PersistException {
         String sql = getDeleteQuery();
         connection = pool.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -162,13 +162,13 @@ public abstract class AbstractJDBCDao <T extends GeneralEntity> implements Gener
                 if (connection != null)
                     pool.putConnection(connection);
             } catch (SQLException e) {
-
+                throw new  PersistException(e);
             }
         }
     }
 
     @Override
-    public List<T> getAll() throws PersistException, SQLException {
+    public List<T> getAll() throws PersistException {
         List<T> list;
         ResultSet rs=null;
         connection = pool.getConnection();
@@ -184,29 +184,29 @@ public abstract class AbstractJDBCDao <T extends GeneralEntity> implements Gener
                 if (rs != null)
                     rs.close();
             } catch (SQLException e) {
-                //ignore
+                throw new  PersistException(e);
             }
             try {
                 if (connection != null)
                     pool.putConnection(connection);
             } catch (SQLException e) {
-
+                throw new  PersistException(e);
             }
         }
 
         return list;
     }
 
-    public Connection getConnection() throws SQLException {
+    public Connection getConnection()  {
         connection = pool.getConnection();
         return connection;
     }
-    public void putConnection() throws SQLException {
+    public void putConnection() throws PersistException {
         try {
             if (connection != null)
                 pool.putConnection(connection);
         } catch (SQLException e) {
-
+            throw new  PersistException(e);
         }
     }
      public AbstractJDBCDao() {

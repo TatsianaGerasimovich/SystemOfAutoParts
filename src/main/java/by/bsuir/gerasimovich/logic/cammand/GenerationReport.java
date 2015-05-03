@@ -24,7 +24,7 @@ public class GenerationReport implements ICommand {
     MySqlDaoFactory factory;
     MySqlSelectInAll mySqlSelectInAll;
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws PersistException,SQLException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws PersistException {
         String page = null;
         String typeOfReport = request.getParameter(RequestParameterName.TYPE_OF_REPORT);
         factory = new MySqlDaoFactory();

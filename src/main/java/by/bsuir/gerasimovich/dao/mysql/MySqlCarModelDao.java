@@ -67,8 +67,10 @@ public class MySqlCarModelDao extends AbstractJDBCDao<CarModel> {
         return result;
     }
 
-    public int getNewId() throws PersistException, SQLException {
-        List<CarModel> idCreate = this.getAll();
+    public int getNewId() throws PersistException {
+        List<CarModel> idCreate = null;
+            idCreate = this.getAll();
+
         List<Integer> idCr = new ArrayList();
         for (CarModel item : idCreate) {
             idCr.add(item.getId());
@@ -127,8 +129,8 @@ public class MySqlCarModelDao extends AbstractJDBCDao<CarModel> {
         }finally {
             try {
                    putConnection();
-            } catch (SQLException e) {
-
+            } catch (PersistException e) {
+                throw new  PersistException(e);
             }
         }
     }

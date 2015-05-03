@@ -65,8 +65,10 @@ public class MySqlDocumentDao extends AbstractJDBCDao<Document> {
         return result;
     }
 
-    public int getNewId() throws PersistException, SQLException {
-        List<Document> idCreate = this.getAll();
+    public int getNewId() throws PersistException {
+        List<Document> idCreate = null;
+            idCreate = this.getAll();
+
         List<Integer> idCr = new ArrayList();
         for (Document item : idCreate) {
             idCr.add(item.getId());

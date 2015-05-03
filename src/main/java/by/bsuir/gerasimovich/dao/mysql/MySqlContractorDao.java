@@ -69,8 +69,13 @@ public class MySqlContractorDao extends AbstractJDBCDao<Contractor> {
         return result;
     }
 
-    public int getNewId() throws PersistException, SQLException {
-        List<Contractor> idCreate = this.getAll();
+    public int getNewId() throws PersistException {
+        List<Contractor> idCreate = null;
+        try {
+            idCreate = this.getAll();
+        } catch (PersistException e) {
+            throw new  PersistException("Error in getAll",e);
+        }
         List<Integer> idCr = new ArrayList();
         for (Contractor item : idCreate) {
             idCr.add(item.getId());

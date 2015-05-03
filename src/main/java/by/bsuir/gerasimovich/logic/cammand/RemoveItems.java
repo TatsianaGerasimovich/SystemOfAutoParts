@@ -27,7 +27,7 @@ public class RemoveItems implements ICommand {
     MySqlAutoPartDao mySqlAutoPartDao;
     MySqlCarBrandDao mySqlCarBrandDao;
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws PersistException,SQLException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws PersistException {
         String page = null;
         String typeOfOperation = request.getParameter(RequestParameterName.TYPE_OF_REMOVE_ITEMS);
 

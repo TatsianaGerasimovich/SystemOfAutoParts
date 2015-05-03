@@ -19,25 +19,25 @@ public interface GenericDao<T> {
     /**
      * Создает новую запись, соответствующую объекту object
      */
-    public void persist(T object) throws PersistException, SQLException;
+    public void persist(T object) throws PersistException;
 
     /**
      * Возвращает объект соответствующий записи с первичным ключом key или null
      */
-    public T getByPK(Integer key,String nameOfId) throws PersistException, SQLException;
+    public T getByPK(Integer key,String nameOfId) throws PersistException;
 
     /**
      * Сохраняет состояние объекта в базе данных
      */
-    public void update(T object) throws PersistException, SQLException;
+    public void update(T object) throws PersistException;
 
     /**
      * Удаляет запись об объекте из базы данных
      */
-    public void delete(T object) throws PersistException, SQLException;
+    public void delete(T object) throws PersistException;
 
     /**
      * Возвращает список объектов соответствующих всем записям в базе данных
      */
-    public List<T> getAll() throws PersistException, SQLException;
+    public List<T> getAll() throws PersistException;
 }

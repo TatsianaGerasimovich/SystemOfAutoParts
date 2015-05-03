@@ -24,7 +24,7 @@ public class Search implements ICommand {
     MySqlDaoFactory factory;
     MySqlSelectInAll mySqlSelectInAll;
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws PersistException,SQLException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws PersistException {
         String page = null;
         String whereSearch = request.getParameter(RequestParameterName.WHERE_SEARCH);
         String whatSearch = request.getParameter(RequestParameterName.WHAT_SEARCH);

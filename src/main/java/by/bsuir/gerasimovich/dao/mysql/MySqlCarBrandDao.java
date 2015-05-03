@@ -65,8 +65,9 @@ public class MySqlCarBrandDao extends AbstractJDBCDao<CarBrand> {
         return result;
     }
 
-    public int getNewId() throws PersistException, SQLException {
-        List<CarBrand> idCreate = this.getAll();
+    public int getNewId() throws PersistException {
+        List<CarBrand> idCreate = null;
+        idCreate = this.getAll();
         List<Integer> idCr = new ArrayList();
         for (CarBrand item : idCreate) {
             idCr.add(item.getId());

@@ -28,7 +28,7 @@ public class EnterNewItems implements ICommand {
     MySqlAutoPartDao mySqlAutoPartDao;
     MySqlCarBrandDao mySqlCarBrandDao;
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws PersistException,SQLException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws PersistException {
         String page = null;
         String typeOfOperation = request.getParameter(RequestParameterName.TYPE_OF_ENTER_NEW_AUTO_PARTS);
 
