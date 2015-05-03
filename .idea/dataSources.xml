@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3860888993">
+    <data-source source="LOCAL" name="MySQL - autoparts@localhost" uuid="b7366637-342c-40ee-b442-4680686a94b0">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/autoparts</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfdadfcbdfd9dfd9</user-password>
+      <schema-pattern>autoparts.*</schema-pattern>
+      <driver-properties>
+        <property name="zeroDateTimeBehavior" value="convertToNull" />
+        <property name="tinyInt1isBit" value="false" />
+      </driver-properties>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
