@@ -24,7 +24,7 @@ public class ListOfAllByBrand implements ICommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws PersistException {
         String page = null;
         String filterType = request.getParameter(RequestParameterName.FILTER_TYPE);
-        factory = new MySqlDaoFactory();
+        factory = MySqlDaoFactory.getInstance();
         mySqlSelectInAll = (MySqlSelectInAll) factory.getDao( SelectAll.class);
         request.setAttribute("all1",mySqlSelectInAll.getAllFilter("CarBrands.NameBrand", filterType));
         page = JspPageName.LIST_OF_ALL_BY_BRAND;

@@ -29,7 +29,7 @@ public class OperationWithAgent implements ICommand {
         String page = null;
         String typeOfOperation = request.getParameter(RequestParameterName.TYPE_OF_OPERATION_WITH_AGENT);
 
-        factory = new MySqlDaoFactory();
+        factory = MySqlDaoFactory.getInstance();
         mySqlContractorDao = (MySqlContractorDao) factory.getDao( Contractor.class);
 
         if(typeOfOperation.equals(RequestParameterName.CREATE_AGENT)){

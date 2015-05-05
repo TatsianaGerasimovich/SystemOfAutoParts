@@ -142,7 +142,7 @@
     <img id="u143_img" class="img " src="jsp/accessories/resources/images/transparent.gif"/>
 
     <div id="u144" class="text">
-        <p><span>Name of agent:</span></p>
+        <p><span>Имя агента:</span></p>
     </div>
 </div>
 
@@ -158,7 +158,7 @@
     <img id="u147_img" class="img " src="jsp/accessories/resources/images/transparent.gif"/>
     <!-- Unnamed () -->
     <div id="u148" class="text">
-        <p><span>Address:</span></p>
+        <p><span>Адрес:</span></p>
     </div>
 </div>
 
@@ -170,7 +170,7 @@
     <img id="u150_img" class="img " src="jsp/accessories/resources/images/transparent.gif"/>
 
     <div id="u151" class="text">
-        <p><span>Phone:</span></p>
+        <p><span>Телефон:</span></p>
     </div>
 </div>
 
@@ -181,7 +181,7 @@
     <img id="u169_img" class="img " src="jsp/accessories/resources/images/transparent.gif"/>
 
     <div id="u170" class="text">
-        <p><span>Type of agent:</span></p>
+        <p><span>Тип агента:</span></p>
     </div>
 </div>
 

@@ -28,7 +28,7 @@ public class OperationWithModel implements ICommand {
         String page = null;
         String typeOfOperation = request.getParameter(RequestParameterName.TYPE_OF_OPERATION_WITH_MODEL);
 
-        factory = new MySqlDaoFactory();
+        factory = MySqlDaoFactory.getInstance();
         mySqlCarModelDao = (MySqlCarModelDao) factory.getDao( CarModel.class);
         mySqlCarBrandDao = (MySqlCarBrandDao) factory.getDao( CarBrand.class);
         if(typeOfOperation.equals(RequestParameterName.CREATE_MODEL)){

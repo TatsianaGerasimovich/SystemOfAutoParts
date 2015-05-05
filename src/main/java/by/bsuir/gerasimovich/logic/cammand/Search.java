@@ -28,7 +28,7 @@ public class Search implements ICommand {
         String page = null;
         String whereSearch = request.getParameter(RequestParameterName.WHERE_SEARCH);
         String whatSearch = request.getParameter(RequestParameterName.WHAT_SEARCH);
-        factory = new MySqlDaoFactory();
+        factory = MySqlDaoFactory.getInstance();
         mySqlSelectInAll = (MySqlSelectInAll) factory.getDao( SelectAll.class);
         if(whereSearch.equals("notSearch")) {
             request.setAttribute("all1", mySqlSelectInAll.getAll());

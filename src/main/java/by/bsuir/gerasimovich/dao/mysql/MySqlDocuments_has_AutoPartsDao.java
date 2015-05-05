@@ -21,7 +21,18 @@ public class MySqlDocuments_has_AutoPartsDao extends AbstractJDBCDao<Documents_h
             + "VALUES (?, ?, ?, ?, ?);";
     private final String UPDATE = "UPDATE Documents_has_AutoParts SET autoParts_autoPartId = ? Price=? Number=? Currency=? WHERE documents_DocumentId= ?;";
     private final String DELETE = "DELETE FROM Documents_has_AutoParts WHERE autoParts_autoPartId = ?;";
+    private static MySqlDocuments_has_AutoPartsDao instance;
 
+    public static MySqlDocuments_has_AutoPartsDao getInstance() {
+        if (instance == null) {
+            synchronized (MySqlDocuments_has_AutoPartsDao.class) {
+                if (instance == null) {
+                    instance = new MySqlDocuments_has_AutoPartsDao();
+                }
+            }
+        }
+        return instance;
+    }
     @Override
     public String getSelectQuery() {
         return SELECT;
@@ -43,7 +54,7 @@ public class MySqlDocuments_has_AutoPartsDao extends AbstractJDBCDao<Documents_h
         return DELETE;
     }
 
-    public MySqlDocuments_has_AutoPartsDao() {
+    private MySqlDocuments_has_AutoPartsDao() {
 
     }
 

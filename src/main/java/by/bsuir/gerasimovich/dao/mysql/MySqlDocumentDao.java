@@ -22,7 +22,18 @@ public class MySqlDocumentDao extends AbstractJDBCDao<Document> {
             + "VALUES (?, ?, ?, ?);";
     private final String UPDATE = "UPDATE Documents SET agentId = ?, documentType = ?, date = ? WHERE documentId= ?;";
     private final String DELETE = "DELETE FROM Documents WHERE documentId= ?;";
+    private static MySqlDocumentDao instance;
 
+    public static MySqlDocumentDao getInstance() {
+        if (instance == null) {
+            synchronized (MySqlDocumentDao.class) {
+                if (instance == null) {
+                    instance = new MySqlDocumentDao();
+                }
+            }
+        }
+        return instance;
+    }
     @Override
     public String getSelectQuery() {
         return SELECT;
@@ -44,7 +55,7 @@ public class MySqlDocumentDao extends AbstractJDBCDao<Document> {
         return DELETE;
     }
 
-     public MySqlDocumentDao() {
+     private MySqlDocumentDao() {
 
     }
     @Override

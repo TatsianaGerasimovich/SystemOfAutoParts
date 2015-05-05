@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -27,7 +26,7 @@ public class GenerationReport implements ICommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws PersistException {
         String page = null;
         String typeOfReport = request.getParameter(RequestParameterName.TYPE_OF_REPORT);
-        factory = new MySqlDaoFactory();
+        factory = MySqlDaoFactory.getInstance();
         mySqlSelectInAll = (MySqlSelectInAll) factory.getDao( SelectAll.class);
         if(typeOfReport.equals(RequestParameterName.REPORT_OF_ALL_AUTOPARTS)){
             generateReportOfAll();
@@ -50,7 +49,7 @@ public class GenerationReport implements ICommand {
     private void generateReportOfAll() {
         MySqlDaoFactory factory;
         MySqlSelectInAll mySqlSelectInAll;
-        factory = new MySqlDaoFactory();
+        factory = MySqlDaoFactory.getInstance();
         try {
             mySqlSelectInAll = (MySqlSelectInAll) factory.getDao( SelectAll.class);
             List<SelectAll> list= mySqlSelectInAll.getAll();
@@ -105,7 +104,6 @@ public class GenerationReport implements ICommand {
                     out.println("</html>");
                 }
             } finally {
-
                 out.close();
             }
         } catch (PersistException e) {
@@ -117,7 +115,7 @@ public class GenerationReport implements ICommand {
     private void generateReportOfScarce() {
         MySqlDaoFactory factory;
         MySqlSelectInAll mySqlSelectInAll;
-        factory = new MySqlDaoFactory();
+        factory = MySqlDaoFactory.getInstance();
         try {
             mySqlSelectInAll = (MySqlSelectInAll) factory.getDao( SelectAll.class);
             List<SelectAll> list= mySqlSelectInAll.getAllScarce();
@@ -184,7 +182,8 @@ public class GenerationReport implements ICommand {
     private void generateReportOfResiduesInStock(HttpServletRequest request, HttpServletResponse response) {
         MySqlDaoFactory factory;
         MySqlSelectInAll mySqlSelectInAll;
-        factory = new MySqlDaoFactory();
+        int allNumber=0;
+        factory = MySqlDaoFactory.getInstance();
         String autopartId = request.getParameter(RequestParameterName.ID_OF_AUTO_PART);
         try {
             mySqlSelectInAll = (MySqlSelectInAll) factory.getDao( SelectAll.class);
@@ -219,6 +218,7 @@ public class GenerationReport implements ICommand {
                     out.println("</thead>");
                     out.println("<tbody>");
                     for (SelectAll obj : list) {
+                        allNumber+=obj.getNumber();
                         out.println("<tr>");
                         out.println("<td>" + obj.getAutoPartId() + "</td>");
                         out.println("<td>" + obj.getName() + "</td>");
@@ -232,6 +232,7 @@ public class GenerationReport implements ICommand {
                     }
                     out.println("</tbody>");
                     out.println("</table>");
+                    out.println("<H4 align=\"center\">"+"Общее количество:"+allNumber+"</H4>");
                     out.println("</body>");
                     out.println("</html>");
               } finally {

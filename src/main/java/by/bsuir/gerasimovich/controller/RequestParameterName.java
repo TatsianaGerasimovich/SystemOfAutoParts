@@ -37,14 +37,22 @@ public class RequestParameterName {
     public static final String REPORT_OF_ALL_SCARCE ="reportAboutScarce";
     public static final String REPORT_OF_RESIDUES_IN_STOCK ="reportAboutResiduesInStock";
     public static final String TYPE_OF_ENTER_NEW_AUTO_PARTS="typeOfEnterNewAutoParts";
-    public static final String ENTER_BY_KEYBOARD="ENTER_BY_KEYBOARD";
+    public static final String ENTER_INVOICE_BY_KEYBOARD="ENTER_INVOICE_BY_KEYBOARD";
+    public static final String ENTER_DETAILS_BY_KEYBOARD="ENTER_DETAILS_BY_KEYBOARD";
     public static final String ENTER_BY_FILE="ENTER_BY_FILE";
     public static final String NAME_OF_FILE="nameOfFile";
-    public static final String NEW_AUTOPART="NEWAUTOPART";
+    public static final String NEW_AUTOPART="NEW_AUTOPART";
     public static final String NAME_OF_AUTOPART="nameOfAutopart";
     public static final String TYPE_OF_REMOVE_ITEMS="typeOfRemoveItems";
     public static final String REMOVE_BY_FILE="REMOVE_BY_FILE";
     public static final String REMOVE_AUTOPART="REMOVE_AUTOPART";
-    public static final String REMOVE_BY_KEYBOARD="REMOVE_BY_KEYBOARD";
+    public static final String REMOVE_INVOICE_BY_KEYBOARD="REMOVE_INVOICE_BY_KEYBOARD";
+    public static final String REMOVE_DETAILS_BY_KEYBOARD="REMOVE_DETAILS_BY_KEYBOARD";
+    public static final String DATE_OF_INVOICE="dateOfInvoice";
+    public static final String NUMBER_OF_AUTO_PARTS_ITEMS="numberOfAutoPartsItems";
+    public static final String PRICE_OF_AUTO_PARTS="priceOfAutoPart";
+    public static final String NUMBER_OF_AUTO_PARTS="numberOfAutoPart";
+    public static final String TYPE_OF_CURRENCY="typeOfCurrency";
+    public static final String ENTER_BRANDS_BY_FILE="ENTER_BRANDS_BY_FILE";
 
 }

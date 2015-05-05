@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice>
+    <Date>05.05.2015</Date>
+    <AgentId>1</AgentId>
+    <Autoparts>
+        <Autopart>
+            <AutopartId>1</AutopartId>
+            <Price>350</Price>
+            <Number>-200</Number>
+            <Currency>RUS</Currency>
+        </Autopart>
+
+        <Autopart>
+            <AutopartId>2</AutopartId>
+            <Price>350</Price>
+            <Number>-200</Number>
+            <Currency>US</Currency>
+        </Autopart>
+    </Autoparts>
+</Invoice>

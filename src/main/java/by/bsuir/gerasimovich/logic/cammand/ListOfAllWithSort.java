@@ -25,7 +25,7 @@ public class ListOfAllWithSort implements ICommand {
         String page = null;
         String sortType = request.getParameter(RequestParameterName.SORT_TYPE);
         System.out.println(sortType);
-        factory = new MySqlDaoFactory();
+        factory = MySqlDaoFactory.getInstance();
         mySqlSelectInAll = (MySqlSelectInAll) factory.getDao( SelectAll.class);
         List<SelectAll> list= mySqlSelectInAll.getAllSort(sortType);
         for (SelectAll obj: list){

@@ -24,6 +24,18 @@ public class MySqlAutoPartDao extends AbstractJDBCDao<AutoPart> {
             + "VALUES (?, ?);";
     private final String UPDATE = "UPDATE autoparts SET Name = ? WHERE AutoPartId= ?;";
     private final String DELETE = "DELETE FROM autoparts WHERE AutoPartId = ?;";
+    private static MySqlAutoPartDao instance;
+
+    public static MySqlAutoPartDao getInstance() {
+        if (instance == null) {
+            synchronized (MySqlAutoPartDao.class) {
+                if (instance == null) {
+                    instance = new MySqlAutoPartDao();
+                }
+            }
+        }
+        return instance;
+    }
 
     @Override
     public String getSelectQuery() {
@@ -46,7 +58,7 @@ public class MySqlAutoPartDao extends AbstractJDBCDao<AutoPart> {
         return DELETE;
     }
 
-    public MySqlAutoPartDao() {
+    private MySqlAutoPartDao() {
 
     }
 

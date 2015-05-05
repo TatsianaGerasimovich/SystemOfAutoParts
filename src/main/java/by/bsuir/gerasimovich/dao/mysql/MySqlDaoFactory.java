@@ -24,7 +24,18 @@ public class MySqlDaoFactory implements DaoFactory {
     }
 
     private Map<Class, DaoCreator> creators;
+    private static MySqlDaoFactory instance;
 
+    public static MySqlDaoFactory getInstance() {
+        if (instance == null) {
+            synchronized (MySqlDaoFactory.class) {
+                if (instance == null) {
+                    instance = new MySqlDaoFactory();
+                }
+            }
+        }
+        return instance;
+    }
 
     @Override
     public GenericDao getDao(Class entityClass) throws PersistException {
@@ -35,54 +46,54 @@ public class MySqlDaoFactory implements DaoFactory {
         return creator.create();
     }
 
-    public MySqlDaoFactory() {
+    private MySqlDaoFactory() {
         creators = new HashMap<Class,  DaoCreator>();
         creators.put(Contractor.class, new DaoCreator() {
             @Override
             public GenericDao create() {
-                return new MySqlContractorDao();
+                return  MySqlContractorDao.getInstance();
             }
         });
         creators.put(Document.class, new DaoCreator() {
             @Override
             public GenericDao create() {
-                return new MySqlDocumentDao();
+                return MySqlDocumentDao.getInstance();
             }
         });
         creators.put(CarBrand.class, new DaoCreator() {
             @Override
             public GenericDao create() {
-                return new MySqlCarBrandDao();
+                return  MySqlCarBrandDao.getInstance();
             }
         });
         creators.put(AutoPart.class, new DaoCreator() {
             @Override
             public GenericDao create() {
-                return new MySqlAutoPartDao();
+                return  MySqlAutoPartDao.getInstance();
             }
         });
-        creators.put(AutoPart.AutoParts_has_CarModels.class, new DaoCreator() {
+        creators.put(AutoParts_has_CarModels.class, new DaoCreator() {
             @Override
             public GenericDao create() {
-                return new MySqlAutoParts_has_CarModelsDao();
+                return  MySqlAutoParts_has_CarModelsDao.getInstance();
             }
         });
         creators.put(CarModel.class, new DaoCreator() {
             @Override
             public GenericDao create() {
-                return new MySqlCarModelDao();
+                return MySqlCarModelDao.getInstance();
             }
         });
         creators.put(Documents_has_AutoParts.class, new DaoCreator() {
             @Override
             public GenericDao create() {
-                return new MySqlDocuments_has_AutoPartsDao();
+                return MySqlDocuments_has_AutoPartsDao.getInstance();
             }
         });
         creators.put(SelectAll.class, new DaoCreator() {
             @Override
             public GenericDao create() {
-                return new MySqlSelectInAll();
+                return MySqlSelectInAll.getInstance();
             }
         });
     }

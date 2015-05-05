@@ -23,7 +23,18 @@ public class MySqlContractorDao extends AbstractJDBCDao<Contractor> {
             + "VALUES (?, ?, ?, ?, ?, ?);";
     private final String UPDATE = "UPDATE Contractors SET nameOfAgent = ?, address = ?, phone = ?, typeOfAgent = ?, rating = ? WHERE agentId= ?;";
     private final String DELETE = "DELETE FROM Contractors WHERE agentId= ?;";
+    private static MySqlContractorDao instance;
 
+    public static MySqlContractorDao getInstance() {
+        if (instance == null) {
+            synchronized (MySqlContractorDao.class) {
+                if (instance == null) {
+                    instance = new MySqlContractorDao();
+                }
+            }
+        }
+        return instance;
+    }
     @Override
     public String getSelectQuery() {
         return SELECT;
@@ -45,7 +56,7 @@ public class MySqlContractorDao extends AbstractJDBCDao<Contractor> {
         return  DELETE;
     }
 
-    public MySqlContractorDao() {
+    private MySqlContractorDao() {
 
     }
     @Override

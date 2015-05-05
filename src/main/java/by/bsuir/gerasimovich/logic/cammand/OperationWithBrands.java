@@ -29,7 +29,7 @@ public class OperationWithBrands implements ICommand {
         String page = null;
         String typeOfOperation = request.getParameter(RequestParameterName.TYPE_OF_OPERATION_WITH_BRAND);
 
-        factory = new MySqlDaoFactory();
+        factory = MySqlDaoFactory.getInstance();
         mySqlCarBrandDao = (MySqlCarBrandDao) factory.getDao( CarBrand.class);
         if(typeOfOperation.equals(RequestParameterName.CREATE_BRAND)){
             String nameCarBrand = request.getParameter(RequestParameterName.NAME_OF_CAR_BRAND);

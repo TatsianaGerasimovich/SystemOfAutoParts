@@ -41,6 +41,29 @@ public class MySqlSelectInAll extends AbstractJDBCDao<SelectAll> {
             "INNER JOIN Documents  ON  Documents_has_AutoParts.Documents_DocumentId=Documents.DocumentId\n"+
             "INNER JOIN Contractors  ON  Documents.AgentId=Contractors.AgentId\n"+
             "ORDER BY ? ASC";
+    //!!!!!!!!!!!!!
+    private final String SELECTSCARCE = "SELECT AutoParts.AutoPartId, AutoParts.Name, CarBrands.NameBrand, CarModels.NameModel, "+
+            "CarModels.YearOfRelease,Contractors.NameOfAgent, Documents_has_AutoParts.Price,SUM( Documents_has_AutoParts.Number) FROM AutoParts\n"+
+            "INNER JOIN AutoParts_has_CarModels  ON  AutoParts.AutoPartId=AutoParts_has_CarModels.AutoPartId \n"+
+            "INNER JOIN CarModels  ON  AutoParts_has_CarModels.CarModelId=CarModels.CarModelId \n"+
+            "INNER JOIN CarBrands  ON  CarModels.CarBrandId=CarBrands.CarBrandId\n"+
+            "INNER JOIN Documents_has_AutoParts  ON  AutoParts.AutoPartId=Documents_has_AutoParts.AutoParts_AutoPartId\n"+
+            "INNER JOIN Documents  ON  Documents_has_AutoParts.Documents_DocumentId=Documents.DocumentId\n"+
+            "INNER JOIN Contractors  ON  Documents.AgentId=Contractors.AgentId\n"+
+            "GROUP BY AutoParts.AutoPartId\n"+
+            "HAVING  SUM( Documents_has_AutoParts.Number)<3";
+    private static MySqlSelectInAll instance;
+
+    public static MySqlSelectInAll getInstance() {
+        if (instance == null) {
+            synchronized (MySqlSelectInAll.class) {
+                if (instance == null) {
+                    instance = new MySqlSelectInAll();
+                }
+            }
+        }
+        return instance;
+    }
 
 
     @Override
@@ -61,7 +84,7 @@ public class MySqlSelectInAll extends AbstractJDBCDao<SelectAll> {
         return null;
     }
 
-    public MySqlSelectInAll() {
+    private MySqlSelectInAll() {
 
     }
     @Override
@@ -188,8 +211,8 @@ public class MySqlSelectInAll extends AbstractJDBCDao<SelectAll> {
     }
     public List<SelectAll> getAllScarce() throws PersistException {
         List<SelectAll> list;
-        String sql = SELECT;
-        sql+="\n"+"WHERE Documents_has_AutoParts.Number < 3\n";
+        String sql = SELECTSCARCE;
+       // sql+="\n"+"WHERE Documents_has_AutoParts.Number < 3\n";
         ResultSet rs=null;
         try (PreparedStatement statement = getConnection().prepareStatement(sql)) {
             rs = statement.executeQuery();

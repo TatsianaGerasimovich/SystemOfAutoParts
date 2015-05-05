@@ -24,6 +24,18 @@ public class MySqlCarBrandDao extends AbstractJDBCDao<CarBrand> {
             + "VALUES (?, ?);";
     private final String UPDATE = "UPDATE CarBrands SET nameBrand = ? WHERE carBrandId= ?;";
     private final String DELETE = "DELETE FROM CarBrands WHERE carBrandId = ?;";
+    private static MySqlCarBrandDao instance;
+
+    public static MySqlCarBrandDao getInstance() {
+        if (instance == null) {
+            synchronized (MySqlCarBrandDao.class) {
+                if (instance == null) {
+                    instance = new MySqlCarBrandDao();
+                }
+            }
+        }
+        return instance;
+    }
 
     @Override
     public String getSelectQuery() {
@@ -46,7 +58,7 @@ public class MySqlCarBrandDao extends AbstractJDBCDao<CarBrand> {
         return DELETE;
     }
 
-    public MySqlCarBrandDao() {
+    private MySqlCarBrandDao() {
 
     }
     @Override

@@ -58,36 +58,32 @@
 <body>
 <div id="base" class="">
 
-<!-- Unnamed (Shape) -->
 <a href="index.jsp">
 <div id="u0" class="ax_shape">
     <a href="index.jsp"><img id="u0_img" class="img " src="jsp/accessories/images/index/u0.png"/></a>
-    <!-- Unnamed () -->
+
     <div id="u1" class="text">
         <p><a href="index.jsp"><span>¬­¬à¬Ô¬à¬ä¬Ú¬á</span></a></p>
     </div>
 </div>
 </a>
-<!-- Unnamed (Shape) -->
+
 <div id="u2" class="ax_h1">
     <img id="u2_img" class="img " src="jsp/accessories/images/index/u2.png"/>
-    <!-- Unnamed () -->
+
     <div id="u3" class="text">
         <p><a href="index.jsp"><span>¬³¬Ú¬ã¬ä¬Ö¬Þ¬Ñ ¬å¬é¬×¬ä¬Ñ ¬Ñ¬Ó¬ä¬à¬Ù¬Ñ¬á¬é¬Ñ¬ã¬ä¬Ö¬Û</span></a></p><p><a href="index.jsp"><span>¬ß¬Ñ ¬ã¬Ü¬Ý¬Ñ¬Õ¬Ö</span></a></p>
     </div>
 </div>
 
-<!-- Unnamed (Shape) -->
 <div id="u4" class="ax_h2">
     <img id="u4_img" class="img " src="jsp/accessories/images/onthepicture/u4.png"/>
-    <!-- Unnamed () -->
+
     <div id="u5" class="text">
         <p><span>¬±¬Ö¬â¬Ö¬é¬Ö¬ß¬î ¬Ñ¬Ó¬ä¬à¬Ù¬Ñ¬á¬é¬Ñ¬ã¬ä¬Ö¬Û</span></p>
     </div>
 </div>
 
-
-    <!-- Unnamed (Table) -->
 <div id="u6" class="ax_table">
     <table border=1>
         <thead>
