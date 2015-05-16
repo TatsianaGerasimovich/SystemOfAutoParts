@@ -1,10 +1,9 @@
 package by.bsuir.gerasimovich.dao.mysql;
 
 import by.bsuir.gerasimovich.dao.AbstractJDBCDao;
-import by.bsuir.gerasimovich.dao.PersistException;
+import by.bsuir.gerasimovich.dao.DAOException;
 import by.bsuir.gerasimovich.entity.AutoPart;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,11 +25,11 @@ public class MySqlAutoPartDao extends AbstractJDBCDao<AutoPart> {
     private final String DELETE = "DELETE FROM autoparts WHERE AutoPartId = ?;";
     private static MySqlAutoPartDao instance;
 
-    public static MySqlAutoPartDao getInstance() {
+    public static MySqlAutoPartDao getInstance() throws DAOException {
         if (instance == null) {
             synchronized (MySqlAutoPartDao.class) {
                 if (instance == null) {
-                    instance = new MySqlAutoPartDao();
+                        instance = new MySqlAutoPartDao();
                 }
             }
         }
@@ -58,12 +57,13 @@ public class MySqlAutoPartDao extends AbstractJDBCDao<AutoPart> {
         return DELETE;
     }
 
-    private MySqlAutoPartDao() {
+    private MySqlAutoPartDao() throws DAOException {
+        super();
 
     }
 
     @Override
-    protected List<AutoPart> parseResultSet(ResultSet rs) throws PersistException {
+    protected List<AutoPart> parseResultSet(ResultSet rs) throws DAOException {
         LinkedList<AutoPart> result = new LinkedList<AutoPart>();
         try {
             while (rs.next()) {
@@ -72,13 +72,13 @@ public class MySqlAutoPartDao extends AbstractJDBCDao<AutoPart> {
                 autoPart.setName(rs.getString("Name"));
                 result.add(autoPart);
             }
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
         return result;
     }
 
-    public int getNewId() throws PersistException {
+    public int getNewId() throws DAOException {
         List<AutoPart> idCreate = null;
 
             idCreate = this.getAll();
@@ -98,23 +98,23 @@ public class MySqlAutoPartDao extends AbstractJDBCDao<AutoPart> {
     }
 
     @Override
-    protected void prepareStatementForInsert(PreparedStatement statement, AutoPart object) throws PersistException {
+    protected void prepareStatementForInsert(PreparedStatement statement, AutoPart object) throws DAOException {
         try {
             statement.setInt(1, object.getId());
             statement.setString(2, object.getName());
 
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
 
     @Override
-    protected void prepareStatementForUpdate(PreparedStatement statement, AutoPart object) throws PersistException {
+    protected void prepareStatementForUpdate(PreparedStatement statement, AutoPart object) throws DAOException {
         try {
             statement.setString(1, object.getName());
             statement.setInt(2, object.getId());
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
 }

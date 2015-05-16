@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 /**
  * @author Tatiana
- * @version 1.00 27.04.2015.
+ * @version 1.00 16.04.2015.
  */
 public class DBPool {
     private final String USER = "root";//Логин пользователя
@@ -14,26 +14,30 @@ public class DBPool {
     private final String URL = "jdbc:mysql://localhost:3306/autoparts";//URL адрес
     private final String DRIVER = "com.mysql.jdbc.Driver";//Имя драйвера
 
-    DBPool() {
+    DBPool() throws PoolException {
         try {
             Class.forName(DRIVER);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new PoolException("Driver not found",e) ;
         }
     }
-   public Connection getConnection() {
+   public Connection getConnection() throws PoolException {
        Connection connection = null;
        try {
            connection = DriverManager.getConnection(URL, USER, PASSWORD);
        } catch (SQLException e) {
-           e.printStackTrace();
+           throw new PoolException(e) ;
        }
        return connection;
 
     }
 
-    public void putConnection(Connection connection) throws SQLException {
-        connection.close();
+    public void putConnection(Connection connection) throws PoolException {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new PoolException(e) ;
+        }
     }
 }
 

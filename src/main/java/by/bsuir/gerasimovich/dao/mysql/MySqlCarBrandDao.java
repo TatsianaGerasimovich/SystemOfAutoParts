@@ -1,9 +1,8 @@
 package by.bsuir.gerasimovich.dao.mysql;
 
 import by.bsuir.gerasimovich.dao.AbstractJDBCDao;
-import by.bsuir.gerasimovich.dao.PersistException;
+import by.bsuir.gerasimovich.dao.DAOException;
 import by.bsuir.gerasimovich.entity.CarBrand;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,11 +25,11 @@ public class MySqlCarBrandDao extends AbstractJDBCDao<CarBrand> {
     private final String DELETE = "DELETE FROM CarBrands WHERE carBrandId = ?;";
     private static MySqlCarBrandDao instance;
 
-    public static MySqlCarBrandDao getInstance() {
+    public static MySqlCarBrandDao getInstance() throws DAOException {
         if (instance == null) {
             synchronized (MySqlCarBrandDao.class) {
                 if (instance == null) {
-                    instance = new MySqlCarBrandDao();
+                        instance = new MySqlCarBrandDao();
                 }
             }
         }
@@ -58,11 +57,12 @@ public class MySqlCarBrandDao extends AbstractJDBCDao<CarBrand> {
         return DELETE;
     }
 
-    private MySqlCarBrandDao() {
+    private MySqlCarBrandDao() throws DAOException {
+        super();
 
     }
     @Override
-    protected List<CarBrand> parseResultSet(ResultSet rs) throws PersistException {
+    protected List<CarBrand> parseResultSet(ResultSet rs) throws DAOException {
         LinkedList<CarBrand> result = new LinkedList<CarBrand>();
         try {
             while (rs.next()) {
@@ -71,13 +71,13 @@ public class MySqlCarBrandDao extends AbstractJDBCDao<CarBrand> {
                 carBrand.setNameBrand(rs.getString("nameBrand"));
                 result.add(carBrand);
             }
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
         return result;
     }
 
-    public int getNewId() throws PersistException {
+    public int getNewId() throws DAOException {
         List<CarBrand> idCreate = null;
         idCreate = this.getAll();
         List<Integer> idCr = new ArrayList();
@@ -95,23 +95,23 @@ public class MySqlCarBrandDao extends AbstractJDBCDao<CarBrand> {
     }
 
     @Override
-    protected void prepareStatementForInsert(PreparedStatement statement, CarBrand object) throws PersistException {
+    protected void prepareStatementForInsert(PreparedStatement statement, CarBrand object) throws DAOException {
         try {
             statement.setInt(1, object.getId());
             statement.setString(2, object.getNameBrand());          
 
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
 
     @Override
-    protected void prepareStatementForUpdate(PreparedStatement statement, CarBrand object) throws PersistException {
+    protected void prepareStatementForUpdate(PreparedStatement statement, CarBrand object) throws DAOException {
         try {
             statement.setString(1, object.getNameBrand());            
             statement.setInt(2, object.getId());
         } catch (Exception e) {
-            throw new PersistException(e);
+            throw new DAOException(e);
         }
     }
 }

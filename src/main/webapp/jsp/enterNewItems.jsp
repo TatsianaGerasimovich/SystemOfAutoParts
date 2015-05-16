@@ -16,57 +16,6 @@
     <link href="jsp/accessories/resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="jsp/accessories/data/styles.css" type="text/css" rel="stylesheet"/>
     <link href="jsp/accessories/files/enternewitems/styles.css" type="text/css" rel="stylesheet"/>
-    <script src="jsp/accessories/resources/scripts/jquery-1.7.1.min.js"></script>
-    <script src="jsp/accessories/resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/axQuery.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/globals.js"></script>
-    <script src="jsp/accessories/resources/scripts/axutils.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/annotation.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/axQuery.std.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/doc.js"></script>
-    <script src="jsp/accessories/data/document.js"></script>
-    <script src="jsp/accessories/resources/scripts/messagecenter.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/events.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/action.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/expr.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/geometry.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/flyout.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/ie.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/model.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/repeater.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/sto.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/utils.temp.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/variables.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/drag.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/move.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/visibility.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/style.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/adaptive.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/tree.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/init.temp.js"></script>
-    <script src="jsp/accessories/files/enternewitems/data.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/legacy.js"></script>
-    <script src="jsp/accessories//scripts/axure/viewer.js"></script>
-    <script type="text/javascript">
-        $axure.utils.getTransparentGifPath = function () {
-            return 'jsp/accessories/resources/images/transparent.gif';
-        };
-        $axure.utils.getOtherPath = function () {
-            return 'jsp/accessories/resources/Other.html';
-        };
-        $axure.utils.getReloadPath = function () {
-            return 'jsp/accessories/resources/reload.html';
-        };
-    </script>
-    <script type="text/javascript">
-
-        jQuery(function($) {
-
-            $.mask.definitions['~']='[+-]';
-
-            $('#u23_input').mask('99.99.9999');
-        });</script>
-
 </head>
 <body>
 <div id="base" class="">
@@ -204,14 +153,14 @@
         <img id="u18_img" class="img " src="jsp/accessories/resources/images/transparent.gif"/>
 
         <div id="u19" class="text">
-            <p><span>Количество наименований</span></p>
+           <p><span>Количество наименований</span></p>
 
             <p><span>автозапчастей в накладной</span></p>
         </div>
     </div>
 
     <div id="u20" class="ax_text_field">
-        <input name="numberOfAutoPartsItems" id="u20_input" type="text" value=""/>
+        <input name="numberOfAutoPartsItems" pattern="[0-9]+" id="u20_input" type="text" value=""/>
     </div>
 
     <div id="u21" class="ax_paragraph">
@@ -223,7 +172,7 @@
     </div>
 
     <div id="u23" class="ax_text_field">
-        <input name="dateOfInvoice" id="u23_input" type="text" value=""/>
+        <input name="dateOfInvoice" id="u23_input" type="date" value=""/>
     </div>
 
     <div id="u24" class="ax_paragraph">
@@ -231,7 +180,7 @@
 
         <div id="u25" class="text">
 
-            <p><span>Номер</span><span>&nbsp;</span><span>контрагента:</span></p>
+            <br/>  <p><span>Номер</span><span>&nbsp;</span><span>контрагента:</span></p>
         </div>
     </div>
 
@@ -294,7 +243,7 @@
     </div>
 
     <div id="u42" class="ax_text_field">
-        <input name="priceOfAutoPart" id="u42_input" type="text" value="" />
+        <input name="priceOfAutoPart" pattern="[0-9]+" id="u42_input" type="text" value="" />
     </div>
 
     <div id="u43" class="ax_paragraph">
@@ -306,7 +255,7 @@
     </div>
 
     <div id="u45" class="ax_text_field">
-        <input name="numberOfAutoPart" id="u45_input" type="text" value="" />
+        <input name="numberOfAutoPart" pattern="[0-9]+" id="u45_input" type="text" value="" />
     </div>
 
     <div id="u46" class="ax_paragraph">

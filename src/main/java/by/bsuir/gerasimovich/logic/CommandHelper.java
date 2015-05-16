@@ -1,6 +1,6 @@
 package by.bsuir.gerasimovich.logic;
 
-import by.bsuir.gerasimovich.logic.cammand.*;
+import by.bsuir.gerasimovich.logic.command.*;
 
 import java.util.EnumMap;
 import java.util.Map;

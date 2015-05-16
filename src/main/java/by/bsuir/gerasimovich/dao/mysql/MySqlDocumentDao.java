@@ -1,9 +1,8 @@
 package by.bsuir.gerasimovich.dao.mysql;
 
 import by.bsuir.gerasimovich.dao.AbstractJDBCDao;
-import by.bsuir.gerasimovich.dao.PersistException;
+import by.bsuir.gerasimovich.dao.DAOException;
 import by.bsuir.gerasimovich.entity.Document;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +23,7 @@ public class MySqlDocumentDao extends AbstractJDBCDao<Document> {
     private final String DELETE = "DELETE FROM Documents WHERE documentId= ?;";
     private static MySqlDocumentDao instance;
 
-    public static MySqlDocumentDao getInstance() {
+    public static MySqlDocumentDao getInstance() throws DAOException {
         if (instance == null) {
             synchronized (MySqlDocumentDao.class) {
                 if (instance == null) {
@@ -55,11 +54,12 @@ public class MySqlDocumentDao extends AbstractJDBCDao<Document> {
         return DELETE;
     }
 
-     private MySqlDocumentDao() {
+     private MySqlDocumentDao() throws DAOException {
+         super();
 
-    }
+     }
     @Override
-    protected List<Document> parseResultSet(ResultSet rs) throws PersistException {
+    protected List<Document> parseResultSet(ResultSet rs) throws DAOException {
         LinkedList<Document> result = new LinkedList<Document>();
         try {
             while (rs.next()) {
@@ -70,13 +70,13 @@ public class MySqlDocumentDao extends AbstractJDBCDao<Document> {
                 order.setDate(rs.getDate("date"));
                 result.add(order);
             }
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
         return result;
     }
 
-    public int getNewId() throws PersistException {
+    public int getNewId() throws DAOException {
         List<Document> idCreate = null;
             idCreate = this.getAll();
 
@@ -95,28 +95,28 @@ public class MySqlDocumentDao extends AbstractJDBCDao<Document> {
     }
 
     @Override
-    protected void prepareStatementForInsert(PreparedStatement statement, Document object) throws PersistException {
+    protected void prepareStatementForInsert(PreparedStatement statement, Document object) throws DAOException {
         try {
             statement.setInt(1, object.getId());
             statement.setInt(2, object.getAgentId());
             statement.setString(3, object.getDocumentType());
             statement.setDate(4, object.getDate());
 
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
 
     @Override
-    protected void prepareStatementForUpdate(PreparedStatement statement, Document object) throws PersistException {
+    protected void prepareStatementForUpdate(PreparedStatement statement, Document object) throws DAOException {
         try {
             statement.setInt(1, object.getAgentId());
             statement.setString(2, object.getDocumentType());
             statement.setDate(3, object.getDate());
             statement.setInt(4, object.getId());
 
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
 }

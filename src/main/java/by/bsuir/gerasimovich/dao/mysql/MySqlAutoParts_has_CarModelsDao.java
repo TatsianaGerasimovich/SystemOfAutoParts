@@ -2,12 +2,13 @@ package by.bsuir.gerasimovich.dao.mysql;
 
 
 import by.bsuir.gerasimovich.dao.AbstractJDBCDao;
-import by.bsuir.gerasimovich.dao.PersistException;
+import by.bsuir.gerasimovich.dao.DAOException;
 import by.bsuir.gerasimovich.entity.AutoParts_has_CarModels;
 
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,11 +24,11 @@ public class MySqlAutoParts_has_CarModelsDao extends AbstractJDBCDao<AutoParts_h
     private final String DELETE = "DELETE FROM AutoParts_has_CarModels WHERE autoPartId = ?;";
     private static MySqlAutoParts_has_CarModelsDao instance;
 
-    public static MySqlAutoParts_has_CarModelsDao getInstance() {
+    public static MySqlAutoParts_has_CarModelsDao getInstance() throws DAOException {
         if (instance == null) {
             synchronized (MySqlAutoParts_has_CarModelsDao.class) {
                 if (instance == null) {
-                    instance = new MySqlAutoParts_has_CarModelsDao();
+                        instance = new MySqlAutoParts_has_CarModelsDao();
                 }
             }
         }
@@ -54,12 +55,13 @@ public class MySqlAutoParts_has_CarModelsDao extends AbstractJDBCDao<AutoParts_h
         return DELETE;
     }
 
-    private MySqlAutoParts_has_CarModelsDao() {
+    private MySqlAutoParts_has_CarModelsDao() throws DAOException {
+        super();
 
     }
 
     @Override
-    protected List<AutoParts_has_CarModels> parseResultSet(ResultSet rs) throws PersistException {
+    protected List<AutoParts_has_CarModels> parseResultSet(ResultSet rs) throws DAOException {
         LinkedList<AutoParts_has_CarModels> result = new LinkedList<AutoParts_has_CarModels>();
         try {
             while (rs.next()) {
@@ -69,32 +71,32 @@ public class MySqlAutoParts_has_CarModelsDao extends AbstractJDBCDao<AutoParts_h
                 part.setCarBrandId(rs.getInt("CarBrandId"));
                 result.add(part);
             }
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
         return result;
     }
 
     @Override
-    protected void prepareStatementForInsert(PreparedStatement statement, AutoParts_has_CarModels object) throws PersistException {
+    protected void prepareStatementForInsert(PreparedStatement statement, AutoParts_has_CarModels object) throws DAOException {
         try {
             statement.setInt(1, object.getId());
             statement.setInt(2, object.getCarModelId());
             statement.setInt(3, object.getCarBrandId());
 
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
 
     @Override
-    protected void prepareStatementForUpdate(PreparedStatement statement, AutoParts_has_CarModels object) throws PersistException {
+    protected void prepareStatementForUpdate(PreparedStatement statement, AutoParts_has_CarModels object) throws DAOException {
         try {
             statement.setInt(1, object.getCarModelId());
             statement.setInt(2, object.getCarBrandId());
             statement.setInt(3, object.getId());
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
 }

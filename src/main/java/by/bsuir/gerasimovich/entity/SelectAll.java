@@ -11,6 +11,7 @@ public class SelectAll implements GeneralEntity {
     private String nameModel;
     private int yearOfRelease;
     private String nameOfAgent;
+    private String currency;
     private int price;
     private int number;
 
@@ -91,6 +92,14 @@ public class SelectAll implements GeneralEntity {
         this.number = number;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -106,6 +115,7 @@ public class SelectAll implements GeneralEntity {
         if (!nameBrand.equals(selectAll.nameBrand)) return false;
         if (!nameModel.equals(selectAll.nameModel)) return false;
         if (!nameOfAgent.equals(selectAll.nameOfAgent)) return false;
+        if (!currency.equals(selectAll.currency)) return false;
 
         return true;
     }
@@ -118,6 +128,7 @@ public class SelectAll implements GeneralEntity {
         result = 31 * result + nameModel.hashCode();
         result = 31 * result + yearOfRelease;
         result = 31 * result + nameOfAgent.hashCode();
+        result = 31 * result + currency.hashCode();
         result = 31 * result + price;
         result = 31 * result + number;
         return result;
@@ -133,7 +144,8 @@ public class SelectAll implements GeneralEntity {
                 ", yearOfRelease=" + yearOfRelease +
                 ", nameOfAgent='" + nameOfAgent + '\'' +
                 ", price=" + price +
-                ", number=" + number;
+                ", number=" + number+
+                ", currency=" + currency;
     }
 
     public int getAutoPartId() {

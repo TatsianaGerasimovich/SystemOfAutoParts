@@ -18,42 +18,6 @@
     <link href="jsp/accessories/resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="jsp/accessories/data/styles.css" type="text/css" rel="stylesheet"/>
     <link href="jsp/accessories/files/onthepicture/styles.css" type="text/css" rel="stylesheet"/>
-    <script src="jsp/accessories/resources/scripts/jquery-1.7.1.min.js"></script>
-    <script src="jsp/accessories/resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/axQuery.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/globals.js"></script>
-    <script src="jsp/accessories/resources/scripts/axutils.js"></script>
-  -  <script src="jsp/accessories/resources/scripts/axure/annotation.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/axQuery.std.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/doc.js"></script>
-    <script src="jsp/accessories/data/document.js"></script>
-    <script src="jsp/accessories/resources/scripts/messagecenter.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/events.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/action.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/expr.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/geometry.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/flyout.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/ie.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/model.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/repeater.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/sto.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/utils.temp.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/variables.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/drag.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/move.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/visibility.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/style.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/adaptive.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/tree.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/init.temp.js"></script>
-    <script src="jsp/accessories/files/onthepicture/data.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/legacy.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/viewer.js"></script>
-    <script type="jsp/accessories/text/javascript">
-        $axure.utils.getTransparentGifPath = function() { return 'jsp/accessories/resources/images/transparent.gif'; };
-        $axure.utils.getOtherPath = function() { return 'jsp/accessories/resources/Other.html'; };
-        $axure.utils.getReloadPath = function() { return 'jsp/accessories/resources/reload.html'; };
-    </script>
 </head>
 <body>
 <div id="base" class="">
@@ -88,14 +52,14 @@
     <table border=1>
         <thead>
         <tr>
-            <th>Identification number</th>
-            <th>Name autopart</th>
-            <th>Name car brand</th>
-            <th>Name car model</th>
-            <th>Year of release</th>
-            <th>Name of agent</th>
-            <th>Price</th>
-            <th>Number</th>
+            <th>¬¯¬à¬Þ¬Ö¬â ¬Ñ¬Ó¬ä¬à¬Ù¬Ñ¬á¬é¬Ñ¬ã¬ä¬Ú</th>
+            <th>¬¯¬Ñ¬Ù¬Ó¬Ñ¬ß¬Ú¬Ö ¬Ñ¬Ó¬ä¬à¬Ù¬Ñ¬á¬é¬Ñ¬ã¬ä¬Ú</th>
+            <th>¬¯¬Ñ¬Ù¬Ó¬Ñ¬ß¬Ú¬Ö ¬Þ¬Ñ¬â¬Ü¬Ú</th>
+            <th>¬¯¬Ñ¬Ù¬Ó¬Ñ¬ß¬Ú¬Ö ¬Þ¬à¬Õ¬Ö¬Ý¬Ú</th>
+            <th>¬¤¬à¬Õ ¬Ó¬í¬á¬å¬ã¬Ü¬Ñ</th>
+            <th>¬ª¬Þ¬ñ ¬Ü¬à¬ß¬ä¬â¬Ñ¬Ô¬Ö¬ß¬ä¬Ñ</th>
+            <th>¬¸¬Ö¬ß¬Ñ</th>
+            <th>¬¬¬à¬Ý¬Ú¬é¬Ö¬ã¬ä¬Ó¬à</th>
         </tr>
         </thead>
         <tbody>

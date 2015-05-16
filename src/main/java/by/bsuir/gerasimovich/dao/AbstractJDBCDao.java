@@ -47,169 +47,209 @@ public abstract class AbstractJDBCDao <T extends GeneralEntity> implements Gener
      * Разбирает ResultSet и возвращает список объектов соответствующих
      * содержимому ResultSet.
      */
-    protected abstract List<T> parseResultSet(ResultSet rs) throws PersistException;
+    protected abstract List<T> parseResultSet(ResultSet rs) throws DAOException;
 
-    protected abstract void prepareStatementForInsert(PreparedStatement statement, T object) throws PersistException;
+    protected abstract void prepareStatementForInsert(PreparedStatement statement, T object) throws DAOException;
 
-    protected abstract void prepareStatementForUpdate(PreparedStatement statement, T object) throws PersistException;
+    protected abstract void prepareStatementForUpdate(PreparedStatement statement, T object) throws DAOException;
 
     @Override
-    public void persist(T object) throws PersistException {
+    public void persist(T object) throws DAOException {
         // Добавляем запись
         String sql = getCreateQuery();
-        connection = pool.getConnection();
+        try {
+            connection = pool.getConnection();
+        } catch (PoolException e) {
+            throw new DAOException(e) ;
+        }
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             prepareStatementForInsert(statement, object);
             int count = statement.executeUpdate();
             if (count != 1) {
-                throw new PersistException("On persist modify more then 1 record: " + count);
+                throw new DAOException("On persist modify more then 1 record: " + count);
             }
             statement.close();
-        } catch (Exception e) {
-            throw new PersistException(e);
-        } finally {
-        try {
-            if (connection != null)
-                pool.putConnection(connection);
         } catch (SQLException e) {
-            throw new PersistException(e);
+            throw new DAOException(e);
+        } finally {
+
+            if (connection != null)
+
+                try {
+                    pool.putConnection(connection);
+                } catch (PoolException e) {
+                    throw new DAOException(e) ;
+                }
+
+
         }
-    }
 }
 
     @Override
-    public T getByPK(Integer key, String nameOfId) throws PersistException {
+    public T getByPK(Integer key, String nameOfId) throws DAOException {
         List<T> list;
         String sql = getSelectQuery();
         ResultSet rs=null;
-        connection = pool.getConnection();
+        try {
+            connection = pool.getConnection();
+        } catch (PoolException e) {
+            throw new DAOException(e) ;
+        }
         sql += " WHERE "+nameOfId+" = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, key);
             rs = statement.executeQuery();
             list = parseResultSet(rs);
             statement.close();
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
         finally {
             try {
                 if (rs != null)
                     rs.close();
             } catch (SQLException e) {
-                throw new  PersistException(e);
+                throw new  DAOException(e);
             }
-            try {
+
                 if (connection != null)
-                    pool.putConnection(connection);
-            } catch (SQLException e) {
-                throw new  PersistException(e);
-            }
+                    try {
+                        pool.putConnection(connection);
+                    } catch (PoolException e) {
+                        throw new  DAOException(e);
+                    }
+
         }
         if (list == null || list.size() == 0) {
-            throw new PersistException("Record with PK = " + key + " not found.");
+            throw new DAOException("Record with PK = " + key + " not found.");
         }
         if (list.size() > 1) {
-            throw new PersistException("Received more than one record.");
+            throw new DAOException("Received more than one record.");
         }
-
-
         return list.iterator().next();
     }
 
     @Override
-    public void update(T object) throws PersistException {
+    public void update(T object) throws DAOException {
         String sql = getUpdateQuery();
-        connection = pool.getConnection();
+        try {
+            connection = pool.getConnection();
+        } catch (PoolException e) {
+            throw new  DAOException(e);
+        }
         try (PreparedStatement statement = connection.prepareStatement(sql);) {
             prepareStatementForUpdate(statement, object);
             int count = statement.executeUpdate();
             if (count != 1) {
-                throw new PersistException("On update modify more then 1 record: " + count);
+                throw new DAOException("On update modify more then 1 record: " + count);
             }
             statement.close();
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }finally {
-            try {
+
                 if (connection != null)
-                    pool.putConnection(connection);
-            } catch (SQLException e) {
-                throw new  PersistException(e);
-            }
+                    try {
+                        pool.putConnection(connection);
+                    } catch (PoolException e) {
+                        throw new  DAOException(e);
+                    }
+
         }
     }
 
     @Override
-    public void delete(T object) throws PersistException {
+    public void delete(T object) throws  DAOException {
         String sql = getDeleteQuery();
-        connection = pool.getConnection();
+        try {
+            connection = pool.getConnection();
+        } catch (PoolException e) {
+            throw new  DAOException(e);
+        }
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             try {
                 statement.setObject(1, object.getId());
-            } catch (Exception e) {
-                throw new PersistException(e);
+            } catch (SQLException e) {
+                throw new DAOException(e);
             }
             int count = statement.executeUpdate();
             if (count != 1) {
-                throw new PersistException("On delete modify more then 1 record: " + count);
+                throw new DAOException("On delete modify more then 1 record: " + count);
             }
             statement.close();
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }finally {
-            try {
+
                 if (connection != null)
-                    pool.putConnection(connection);
-            } catch (SQLException e) {
-                throw new  PersistException(e);
-            }
+                    try {
+                        pool.putConnection(connection);
+                    } catch (PoolException e) {
+                        throw new DAOException(e);
+                    }
+
         }
     }
 
     @Override
-    public List<T> getAll() throws PersistException {
+    public List<T> getAll() throws DAOException {
         List<T> list;
         ResultSet rs=null;
-        connection = pool.getConnection();
+        try {
+            connection = pool.getConnection();
+        } catch (PoolException e) {
+            throw new DAOException(e);
+        }
         String sql = getSelectQuery();
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
              rs = statement.executeQuery();
             list = parseResultSet(rs);
             statement.close();
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }finally {
             try {
                 if (rs != null)
                     rs.close();
             } catch (SQLException e) {
-                throw new  PersistException(e);
+                throw new  DAOException(e);
             }
-            try {
+
                 if (connection != null)
-                    pool.putConnection(connection);
-            } catch (SQLException e) {
-                throw new  PersistException(e);
-            }
+                    try {
+                        pool.putConnection(connection);
+                    } catch (PoolException e) {
+                        throw new  DAOException(e);
+                    }
+
         }
 
         return list;
     }
 
-    public Connection getConnection()  {
-        connection = pool.getConnection();
+    public Connection getConnection() throws DAOException {
+        try {
+            connection = pool.getConnection();
+        } catch (PoolException e) {
+            throw new  DAOException(e);
+        }
         return connection;
     }
-    public void putConnection() throws PersistException {
-        try {
+    public void putConnection() throws DAOException {
+
             if (connection != null)
-                pool.putConnection(connection);
-        } catch (SQLException e) {
-            throw new  PersistException(e);
-        }
+                try {
+                    pool.putConnection(connection);
+                } catch (PoolException e) {
+                    throw new  DAOException(e);
+                }
+
     }
-     public AbstractJDBCDao() {
-        pool=new DBPool();
-    }
+     public AbstractJDBCDao() throws DAOException {
+         try {
+             pool=new DBPool();
+         } catch (PoolException e) {
+             throw new  DAOException(e);
+         }
+     }
 }

@@ -17,42 +17,6 @@
     <link href="jsp/accessories/resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="jsp/accessories/data/styles.css" type="text/css" rel="stylesheet"/>
     <link href="jsp/accessories/files/operationwithagents/styles.css" type="text/css" rel="stylesheet"/>
-    <script src="jsp/accessories/resources/scripts/jquery-1.7.1.min.js"></script>
-    <script src="jsp/accessories/resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/axQuery.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/globals.js"></script>
-    <script src="jsp/accessories/resources/scripts/axutils.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/annotation.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/axQuery.std.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/doc.js"></script>
-    <script src="jsp/accessories/data/document.js"></script>
-    <script src="jsp/accessories/resources/scripts/messagecenter.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/events.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/action.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/expr.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/geometry.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/flyout.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/ie.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/model.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/repeater.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/sto.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/utils.temp.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/variables.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/drag.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/move.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/visibility.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/style.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/adaptive.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/tree.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/init.temp.js"></script>
-    <script src="jsp/accessories/files/operationwithagents/data.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/legacy.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/viewer.js"></script>
-    <script type="text/javascript">
-        $axure.utils.getTransparentGifPath = function() { return 'jsp/accessories/resources/images/transparent.gif'; };
-        $axure.utils.getOtherPath = function() { return 'jsp/accessories/resources/Other.html'; };
-        $axure.utils.getReloadPath = function() { return 'jsp/accessories/resources/reload.html'; };
-    </script>
 </head>
 <body>
 <div id="base" class="">
@@ -81,7 +45,7 @@
 
 <div id="u10" class="ax_h2">
     <img id="u10_img" class="img " src="jsp/accessories/images/onthepicture/u4.png"/>
-    <!-- Unnamed () -->
+
     <div id="u11" class="text">
         <p><span>Операции с контрагентами:</span></p>
     </div>
@@ -91,12 +55,12 @@
     <table border=1>
         <thead>
         <tr>
-            <th>Identification number</th>
-            <th>Name of agent</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Type of agent</th>
-            <th>Rating</th>
+            <th>Номер агента</th>
+            <th>Имя агента</th>
+            <th>Адрес</th>
+            <th>Телефон</th>
+            <th>Тип агента</th>
+            <th>Рейтинг</th>
 
         </tr>
         </thead>
@@ -156,7 +120,7 @@
 
 <div id="u147" class="ax_paragraph">
     <img id="u147_img" class="img " src="jsp/accessories/resources/images/transparent.gif"/>
-    <!-- Unnamed () -->
+
     <div id="u148" class="text">
         <p><span>Адрес:</span></p>
     </div>
@@ -175,7 +139,7 @@
 </div>
 
 <div id="u152" class="ax_text_field">
-    <input id="u152_input" type="text" name="phoneOfAgent" value=""/>
+    <input id="u152_input" pattern="[0-9]+" type="text" name="phoneOfAgent" value=""/>
 </div>
 <div id="u169" class="ax_paragraph">
     <img id="u169_img" class="img " src="jsp/accessories/resources/images/transparent.gif"/>
@@ -197,7 +161,7 @@
     <img id="u172_img" class="img " src="jsp/accessories/resources/images/transparent.gif"/>
 
     <div id="u173" class="text">
-        <p><span>Rating:</span></p>
+        <p><span>Рейтинг:</span></p>
     </div>
 </div>
 
@@ -238,7 +202,7 @@
     <img id="u158_img" class="img " src="jsp/accessories/resources/images/transparent.gif"/>
 
     <div id="u159" class="text">
-        <p><span>Identification</span></p><p><span>number</span><span>:</span></p>
+        <p><span>Номер</span></p><p><span>агента</span><span>:</span></p>
     </div>
 </div>
 
@@ -261,7 +225,7 @@
         <img id="u175_img" class="img " src="jsp/accessories/resources/images/transparent.gif"/>
 
         <div id="u176" class="text">
-            <p><span>Name of agent:</span></p>
+            <p><span>Имя агента:</span></p>
         </div>
     </div>
 
@@ -285,19 +249,19 @@
         <img id="u181_img" class="img " src="jsp/accessories/resources/images/transparent.gif"/>
 
         <div id="u182" class="text">
-            <p><span>Phone:</span></p>
+            <p><span>Телефон:</span></p>
         </div>
     </div>
 
     <div id="u183" class="ax_text_field">
-        <input id="u183_input" type="text" name="phoneOfAgent" value=""/>
+        <input id="u183_input"  pattern="[0-9]+" type="text" name="phoneOfAgent" value=""/>
     </div>
 
     <div id="u184" class="ax_paragraph">
         <img id="u184_img" class="img " src="jsp/accessories/resources/images/transparent.gif"/>
 
         <div id="u185" class="text">
-            <p><span>Type of agent:</span></p>
+            <p><span>Тип агента:</span></p>
         </div>
     </div>
 
@@ -343,7 +307,7 @@
     <img id="u165_img" class="img " src="jsp/accessories/resources/images/transparent.gif"/>
 
     <div id="u166" class="text">
-        <p><span>Identification </span><span>number</span><span>:</span></p>
+        <p><span>Номер </span><span>агента</span><span>:</span></p>
     </div>
 </div>
 

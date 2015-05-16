@@ -1,12 +1,13 @@
 package by.bsuir.gerasimovich.dao.mysql;
 
 import by.bsuir.gerasimovich.dao.AbstractJDBCDao;
-import by.bsuir.gerasimovich.dao.PersistException;
+import by.bsuir.gerasimovich.dao.DAOException;
 import by.bsuir.gerasimovich.entity.Documents_has_AutoParts;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class MySqlDocuments_has_AutoPartsDao extends AbstractJDBCDao<Documents_h
     private final String DELETE = "DELETE FROM Documents_has_AutoParts WHERE autoParts_autoPartId = ?;";
     private static MySqlDocuments_has_AutoPartsDao instance;
 
-    public static MySqlDocuments_has_AutoPartsDao getInstance() {
+    public static MySqlDocuments_has_AutoPartsDao getInstance() throws DAOException {
         if (instance == null) {
             synchronized (MySqlDocuments_has_AutoPartsDao.class) {
                 if (instance == null) {
@@ -54,12 +55,13 @@ public class MySqlDocuments_has_AutoPartsDao extends AbstractJDBCDao<Documents_h
         return DELETE;
     }
 
-    private MySqlDocuments_has_AutoPartsDao() {
+    private MySqlDocuments_has_AutoPartsDao() throws DAOException {
+        super();
 
     }
 
     @Override
-    protected List<Documents_has_AutoParts> parseResultSet(ResultSet rs) throws PersistException {
+    protected List<Documents_has_AutoParts> parseResultSet(ResultSet rs) throws DAOException {
         LinkedList<Documents_has_AutoParts> result = new LinkedList<Documents_has_AutoParts>();
         try {
             while (rs.next()) {
@@ -68,14 +70,14 @@ public class MySqlDocuments_has_AutoPartsDao extends AbstractJDBCDao<Documents_h
                 part.setDocumentId(rs.getInt("documents_DocumentId"));
                 result.add(part);
             }
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
         return result;
     }
 
     @Override
-    protected void prepareStatementForInsert(PreparedStatement statement, Documents_has_AutoParts object) throws PersistException {
+    protected void prepareStatementForInsert(PreparedStatement statement, Documents_has_AutoParts object) throws DAOException {
         try {
             statement.setInt(1, object.getId());
             statement.setInt(2, object.getDocumentId());
@@ -83,21 +85,21 @@ public class MySqlDocuments_has_AutoPartsDao extends AbstractJDBCDao<Documents_h
             statement.setInt(4, object.getNumber());
             statement.setString(5, object.getCurrency());
 
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
 
     @Override
-    protected void prepareStatementForUpdate(PreparedStatement statement, Documents_has_AutoParts object) throws PersistException {
+    protected void prepareStatementForUpdate(PreparedStatement statement, Documents_has_AutoParts object) throws DAOException {
         try {
             statement.setInt(1, object.getId());
             statement.setInt(2, object.getPrice());
             statement.setInt(3, object.getNumber());
             statement.setString(4, object.getCurrency());
             statement.setInt(5, object.getDocumentId());
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
 }

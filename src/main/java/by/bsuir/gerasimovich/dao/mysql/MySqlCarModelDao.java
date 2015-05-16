@@ -1,10 +1,9 @@
 package by.bsuir.gerasimovich.dao.mysql;
 
 import by.bsuir.gerasimovich.dao.AbstractJDBCDao;
-import by.bsuir.gerasimovich.dao.PersistException;
+import by.bsuir.gerasimovich.dao.DAOException;
 import by.bsuir.gerasimovich.entity.CarModel;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +25,7 @@ public class MySqlCarModelDao extends AbstractJDBCDao<CarModel> {
     private final String DELETE = "DELETE FROM CarModels WHERE carModelId= ? AND carBrandId = ?;";
     private static MySqlCarModelDao instance;
 
-    public static MySqlCarModelDao getInstance() {
+    public static MySqlCarModelDao getInstance() throws DAOException {
         if (instance == null) {
             synchronized (MySqlCarModelDao.class) {
                 if (instance == null) {
@@ -58,12 +57,13 @@ public class MySqlCarModelDao extends AbstractJDBCDao<CarModel> {
         return DELETE;
     }
 
-    private MySqlCarModelDao() {
+    private MySqlCarModelDao() throws DAOException {
+        super();
 
     }
     @Override
-    protected List<CarModel> parseResultSet(ResultSet rs) throws PersistException {
-        LinkedList<CarModel> result = new LinkedList<CarModel>();
+    protected List<CarModel> parseResultSet(ResultSet rs) throws DAOException {
+        List<CarModel> result = new LinkedList<>();
         try {
             while (rs.next()) {
                 CarModel carModel = new CarModel();
@@ -73,13 +73,13 @@ public class MySqlCarModelDao extends AbstractJDBCDao<CarModel> {
                 carModel.setYearOfRelease(rs.getInt("YearOfRelease"));
                 result.add(carModel);
             }
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
         return result;
     }
 
-    public int getNewId() throws PersistException {
+    public int getNewId() throws DAOException {
         List<CarModel> idCreate = null;
             idCreate = this.getAll();
 
@@ -98,52 +98,48 @@ public class MySqlCarModelDao extends AbstractJDBCDao<CarModel> {
     }
 
     @Override
-    protected void prepareStatementForInsert(PreparedStatement statement, CarModel object) throws PersistException {
+    protected void prepareStatementForInsert(PreparedStatement statement, CarModel object) throws DAOException {
         try {
             statement.setInt(1, object.getId());
             statement.setInt(2, object.getCarBrandId());
             statement.setString (3, object.getNameModel());
             statement.setInt(4,object.getYearOfRelease());
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
 
     @Override
-    protected void prepareStatementForUpdate(PreparedStatement statement, CarModel object) throws PersistException {
+    protected void prepareStatementForUpdate(PreparedStatement statement, CarModel object) throws DAOException {
         try {
             statement.setString (1, object.getNameModel());
             statement.setInt(2,object.getYearOfRelease());
             statement.setInt(3, object.getId());
             statement.setInt(4, object.getCarBrandId());
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
     @Override
-    public void delete(CarModel object) throws PersistException {
+    public void delete(CarModel object) throws DAOException {
         String sql = getDeleteQuery();
         try (PreparedStatement statement = getConnection().prepareStatement(sql)) {
             try {
                     statement.setInt(1, object.getId());
                     statement.setInt(2, object.getCarBrandId());
 
-            } catch (Exception e) {
-                throw new PersistException(e);
+            } catch (SQLException e) {
+                throw new DAOException(e);
             }
             int count = statement.executeUpdate();
             if (count != 1) {
-                throw new PersistException("On delete modify more then 1 record: " + count);
+                throw new DAOException("On delete modify more then 1 record: " + count);
             }
             statement.close();
-        } catch (Exception e) {
-            throw new PersistException(e);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }finally {
-            try {
-                   putConnection();
-            } catch (PersistException e) {
-                throw new  PersistException(e);
-            }
+             putConnection();
         }
     }
 }

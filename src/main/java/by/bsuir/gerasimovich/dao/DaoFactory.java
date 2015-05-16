@@ -11,6 +11,6 @@ import java.sql.Connection;
  */
 public interface DaoFactory {
     public GenericDao getDao(Class entityClass)
-            throws PersistException;
+            throws FactoryException;
 
    }

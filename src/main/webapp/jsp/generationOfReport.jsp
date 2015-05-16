@@ -17,41 +17,11 @@
     <link href="jsp/accessories/resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="jsp/accessories/data/styles.css" type="text/css" rel="stylesheet"/>
     <link href="jsp/accessories/files/report/styles.css" type="text/css" rel="stylesheet"/>
-    <script src="jsp/accessories/resources/scripts/jquery-1.7.1.min.js"></script>
-    <script src="jsp/accessories/resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/axQuery.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/globals.js"></script>
-    <script src="jsp/accessories/resources/scripts/axutils.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/annotation.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/axQuery.std.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/doc.js"></script>
-    <script src="jsp/accessories/data/document.js"></script>
-    <script src="jsp/accessories/resources/scripts/messagecenter.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/events.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/action.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/expr.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/geometry.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/flyout.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/ie.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/model.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/repeater.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/sto.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/utils.temp.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/variables.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/drag.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/move.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/visibility.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/style.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/adaptive.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/tree.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/init.temp.js"></script>
-    <script src="jsp/accessories/files/report/data.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/legacy.js"></script>
-    <script src="jsp/accessories/resources/scripts/axure/viewer.js"></script>
+
     <script type="text/javascript">
-        $axure.utils.getTransparentGifPath = function() { return 'jsp/accessories/resources/images/transparent.gif'; };
-        $axure.utils.getOtherPath = function() { return 'jsp/accessories/resources/Other.html'; };
-        $axure.utils.getReloadPath = function() { return 'jsp/accessories/resources/reload.html'; };
+        function submitForm(formId) {
+            document.getElementById(formId).submit();
+        }
     </script>
 </head>
 <body>
@@ -93,29 +63,31 @@
         </div>
     </div>
 
-    <a href="Controller?command=GENERATION_REPORT&typeOfReport=reportOfAll">
-    <div id="u8" class="ax_shape">
-        <a href="Controller?command=GENERATION_REPORT&typeOfReport=reportOfAll">
-            <img id="u8_img" class="img " src="jsp/accessories/images/index/u270.png"/>
-            </a>
-        <a href="Controller?command=GENERATION_REPORT&typeOfReport=reportOfAll">
-        <div id="u9" class="text">
-            <p><a href="Controller?command=GENERATION_REPORT&typeOfReport=reportOfAll"><span><c:out value='${reportAll1}'>Оформить отчёт о количестве всех видов запчастей</c:out></span></a></p>
-        </div>
-            </a>
-    </div>
-        </a>
 
-    <a href="Controller?command=GENERATION_REPORT&typeOfReport=reportAboutScarce">
-    <div id="u10" class="ax_shape">
-        <a href="Controller?command=GENERATION_REPORT&typeOfReport=reportAboutScarce">
-        <img id="u10_img" class="img " src="jsp/accessories/images/index/u270.png"/>
-</a>
-        <a href="Controller?command=GENERATION_REPORT&typeOfReport=reportAboutScarce"><div id="u11" class="text">
-            <p><a href="Controller?command=GENERATION_REPORT&typeOfReport=reportAboutScarce"><span><c:out value='${reportAll2}'>Оформить отчёт о дефицитных запчастях</c:out></span></a></p>
-        </div></a>
+    <div id="u8" class="ax_shape" onclick="submitForm('reportOfAll')">
+        <form action="Controller" id="reportOfAll" method="post">
+            <input type="hidden" name="command" value="GENERATION_REPORT">
+            <input type="hidden" name="typeOfReport" value="reportOfAll">
+        </form>
+            <img id="u8_img" class="img " src="jsp/accessories/images/index/u270.png"/>
+
+        <div id="u9" class="text">
+            <p><span><c:out value='${reportAll1}'>Оформить отчёт о количестве всех видов запчастей</c:out></span></p>
+        </div>
     </div>
-</a>
+
+
+    <div id="u10" class="ax_shape" onclick="submitForm('reportAboutScarce')">
+        <form action="Controller" id="reportAboutScarce" method="post">
+            <input type="hidden" name="command" value="GENERATION_REPORT">
+            <input type="hidden" name="typeOfReport" value="reportAboutScarce">
+        </form>
+        <img id="u10_img" class="img " src="jsp/accessories/images/index/u270.png"/>
+        <div id="u11" class="text">
+            <p><span><c:out value='${reportAll2}'>Оформить отчёт о дефицитных запчастях</c:out></span></p>
+        </div>
+    </div>
+
     <div id="u12" class="ax_shape">
         <img id="u12_img" class="img " src="jsp/accessories/images/report/u12.png"/>
 
@@ -132,7 +104,7 @@
         <img id="u14_img" class="img " src="jsp/accessories/images/report/u14.png"/>
 
         <div id="u15" class="text">
-            <p><span>Identification</span></p><p><span> number of autopart:</span></p>
+            <p><span>Номер автозапчасти:</span></p>
         </div>
     </div>
 

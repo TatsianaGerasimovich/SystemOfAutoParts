@@ -66,7 +66,7 @@
     </dependencies>
 
     <build>
-        <finalName>task5</finalName>
+        <finalName>SystemOfAutoparts</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -76,7 +76,7 @@
                     <server>apache-tomcat-8</server>
                     <url>http://localhost:8080/manager/text</url>
                     <update>true</update>
-                    <path>/task5</path>
+                    <path>/SystemOfAutoparts</path>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,13 +1,11 @@
 package by.bsuir.gerasimovich.dao.mysql;
 
+import by.bsuir.gerasimovich.dao.DAOException;
+import by.bsuir.gerasimovich.dao.FactoryException;
 import by.bsuir.gerasimovich.entity.*;
 import by.bsuir.gerasimovich.dao.DaoFactory;
 import by.bsuir.gerasimovich.dao.GenericDao;
-import by.bsuir.gerasimovich.dao.PersistException;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +18,7 @@ public class MySqlDaoFactory implements DaoFactory {
 
     public interface DaoCreator {
 
-        public GenericDao create();
+        public GenericDao create() throws FactoryException;
     }
 
     private Map<Class, DaoCreator> creators;
@@ -38,10 +36,10 @@ public class MySqlDaoFactory implements DaoFactory {
     }
 
     @Override
-    public GenericDao getDao(Class entityClass) throws PersistException {
+    public GenericDao getDao(Class entityClass) throws FactoryException {
         DaoCreator creator = creators.get(entityClass);
         if (creator == null) {
-            throw new PersistException("Dao object for " + entityClass + " not found.");
+            throw new FactoryException("Dao object for " + entityClass + " not found.");
         }
         return creator.create();
     }
@@ -50,50 +48,82 @@ public class MySqlDaoFactory implements DaoFactory {
         creators = new HashMap<Class,  DaoCreator>();
         creators.put(Contractor.class, new DaoCreator() {
             @Override
-            public GenericDao create() {
-                return  MySqlContractorDao.getInstance();
+            public GenericDao create() throws FactoryException {
+                try {
+                    return  MySqlContractorDao.getInstance();
+                } catch (DAOException e) {
+                    throw new FactoryException(e);
+                }
             }
         });
         creators.put(Document.class, new DaoCreator() {
             @Override
-            public GenericDao create() {
-                return MySqlDocumentDao.getInstance();
+            public GenericDao create() throws FactoryException {
+                try {
+                    return MySqlDocumentDao.getInstance();
+                } catch (DAOException e) {
+                    throw new FactoryException(e);
+                }
             }
         });
         creators.put(CarBrand.class, new DaoCreator() {
             @Override
-            public GenericDao create() {
-                return  MySqlCarBrandDao.getInstance();
+            public GenericDao create()throws FactoryException {
+                try {
+                    return  MySqlCarBrandDao.getInstance();
+                } catch (DAOException e) {
+                    throw new FactoryException(e);
+                }
             }
         });
         creators.put(AutoPart.class, new DaoCreator() {
             @Override
-            public GenericDao create() {
-                return  MySqlAutoPartDao.getInstance();
+            public GenericDao create() throws FactoryException {
+                try {
+                    return  MySqlAutoPartDao.getInstance();
+                } catch (DAOException e) {
+                    throw new FactoryException(e);
+                }
             }
         });
         creators.put(AutoParts_has_CarModels.class, new DaoCreator() {
             @Override
-            public GenericDao create() {
-                return  MySqlAutoParts_has_CarModelsDao.getInstance();
+            public GenericDao create() throws FactoryException{
+                try {
+                    return  MySqlAutoParts_has_CarModelsDao.getInstance();
+                } catch (DAOException e) {
+                    throw new FactoryException(e);
+                }
             }
         });
         creators.put(CarModel.class, new DaoCreator() {
             @Override
-            public GenericDao create() {
-                return MySqlCarModelDao.getInstance();
+            public GenericDao create() throws FactoryException {
+                try {
+                    return MySqlCarModelDao.getInstance();
+                } catch (DAOException e) {
+                    throw new FactoryException(e);
+                }
             }
         });
         creators.put(Documents_has_AutoParts.class, new DaoCreator() {
             @Override
-            public GenericDao create() {
-                return MySqlDocuments_has_AutoPartsDao.getInstance();
+            public GenericDao create()throws FactoryException {
+                try {
+                    return MySqlDocuments_has_AutoPartsDao.getInstance();
+                } catch (DAOException e) {
+                    throw new FactoryException(e);
+                }
             }
         });
         creators.put(SelectAll.class, new DaoCreator() {
             @Override
-            public GenericDao create() {
-                return MySqlSelectInAll.getInstance();
+            public GenericDao create() throws FactoryException{
+                try {
+                    return MySqlSelectInAll.getInstance();
+                } catch (DAOException e) {
+                    throw new FactoryException(e);
+                }
             }
         });
     }
