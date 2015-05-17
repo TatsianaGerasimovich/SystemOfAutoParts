@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AutopartsModels>
+    <AutopartModel>
+        <AutopartId>1</AutopartId>
+        <ModelId>4</ModelId>
+        <BrandId>2</BrandId>
+    </AutopartModel>
+
+    <AutopartModel>
+        <AutopartId>2</AutopartId>
+        <ModelId>1</ModelId>
+        <BrandId>1</BrandId>
+    </AutopartModel>
+</AutopartsModels>
+

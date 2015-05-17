@@ -54,5 +54,6 @@ public class RequestParameterName {
     public static final String NUMBER_OF_AUTO_PARTS="numberOfAutoPart";
     public static final String TYPE_OF_CURRENCY="typeOfCurrency";
     public static final String ENTER_BRANDS_BY_FILE="ENTER_BRANDS_BY_FILE";
+    public static final String NOTHING= "nothing";
 
 }

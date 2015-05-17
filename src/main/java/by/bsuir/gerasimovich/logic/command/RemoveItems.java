@@ -12,6 +12,7 @@ import by.bsuir.gerasimovich.parser.sax.XmlSaxDaoForDoc;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,19 +24,17 @@ import java.util.List;
  * @version 1.00 02.05.2015.
  */
 public class RemoveItems implements ICommand {
-    MySqlDaoFactory factory;
-    MySqlContractorDao mySqlContractorDao;
-    MySqlAutoPartDao mySqlAutoPartDao;
-    MySqlCarBrandDao mySqlCarBrandDao;
-    MySqlDocuments_has_AutoPartsDao mySqlDocuments_has_autoPartsDao;
-    MySqlDocumentDao mySqlDocumentDao;
-    static int count;
-    static int idDocument;
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
+        MySqlDaoFactory factory;
+        MySqlContractorDao mySqlContractorDao;
+        MySqlAutoPartDao mySqlAutoPartDao;
+        MySqlCarBrandDao mySqlCarBrandDao;
+        MySqlDocuments_has_AutoPartsDao mySqlDocuments_has_autoPartsDao;
+        MySqlDocumentDao mySqlDocumentDao;
         String page = null;
         String typeOfOperation = request.getParameter(RequestParameterName.TYPE_OF_REMOVE_ITEMS);
-
+        HttpSession session = request.getSession();
         factory = MySqlDaoFactory.getInstance();
         try {
             mySqlContractorDao = (MySqlContractorDao) factory.getDao( Contractor.class);
@@ -44,7 +43,9 @@ public class RemoveItems implements ICommand {
         mySqlCarBrandDao = (MySqlCarBrandDao) factory.getDao( CarBrand.class);
         mySqlDocuments_has_autoPartsDao=(MySqlDocuments_has_AutoPartsDao) factory.getDao(Documents_has_AutoParts.class);
         mySqlDocumentDao = (MySqlDocumentDao) factory.getDao( Document.class);
-
+            if(typeOfOperation.equals(RequestParameterName.NOTHING)){
+                session.setAttribute("count", -1);
+            }
         if(typeOfOperation.equals(RequestParameterName.REMOVE_AUTOPART)){
             String idOfAutopart = request.getParameter(RequestParameterName.ID_OF_AUTO_PART);
             AutoPart autoPart =new AutoPart(Integer.valueOf(idOfAutopart),"");
@@ -86,25 +87,41 @@ public class RemoveItems implements ICommand {
             }
             String idOfAgent = request.getParameter(RequestParameterName.ID_OF_AGENT);
             String numberOfItems = request.getParameter(RequestParameterName.NUMBER_OF_AUTO_PARTS_ITEMS);
-            count=Integer.parseInt(numberOfItems);
-            idDocument=mySqlDocumentDao.getNewId();
+            session.setAttribute("count", Integer.parseInt(numberOfItems));
+            int idDocument=mySqlDocumentDao.getNewId();
+            session.setAttribute("idDocument", idDocument);
             Document document = new Document(idDocument,Integer.parseInt(idOfAgent),"shipment of invoice",new java.sql.Date(docDate.getTime()));
             System.out.println(document.toString());
             mySqlDocumentDao.persist(document);
-            request.setAttribute("message3", "Введите данные по оставшимся "+count+" автозапчастям");
+            request.setAttribute("message3", "Введите данные по оставшимся "+(Integer) session.getAttribute("count")+" автозапчастям");
         }
         if(typeOfOperation.equals(RequestParameterName.REMOVE_DETAILS_BY_KEYBOARD)){
-            count--;
-            String idOfAutoParts = request.getParameter(RequestParameterName.ID_OF_AUTO_PART);
-            String price = request.getParameter(RequestParameterName.PRICE_OF_AUTO_PARTS);
-            String number = request.getParameter(RequestParameterName.NUMBER_OF_AUTO_PARTS);
-            int num=Integer.parseInt(number);
-            num=num-2*num;
-            String currency = request.getParameter(RequestParameterName.TYPE_OF_CURRENCY);
-            Documents_has_AutoParts details = new Documents_has_AutoParts(Integer.parseInt(idOfAutoParts),idDocument,Integer.parseInt(price),num,currency);
-            System.out.println(details.toString());
-            mySqlDocuments_has_autoPartsDao.persist(details);
-            request.setAttribute("message3", "Введите данные по \n оставшимся "+count+" автозапчастям");
+            int count=(Integer) session.getAttribute("count");
+            if(count==-1){
+                request.setAttribute("error", "Извинете, необходимо ввести сначала данные об накладной");
+                page = JspPageName.ERROR_PAGE;
+                return page;
+            }
+            else if(count==0){
+                request.setAttribute("message2", "Все данные уже введены");
+            }
+            else {
+                count--;
+                String idOfAutoParts = request.getParameter(RequestParameterName.ID_OF_AUTO_PART);
+                String price = request.getParameter(RequestParameterName.PRICE_OF_AUTO_PARTS);
+                String number = request.getParameter(RequestParameterName.NUMBER_OF_AUTO_PARTS);
+                int num = Integer.parseInt(number);
+                num = num - 2 * num;
+                String currency = request.getParameter(RequestParameterName.TYPE_OF_CURRENCY);
+                Documents_has_AutoParts details = new Documents_has_AutoParts(Integer.parseInt(idOfAutoParts), (Integer) session.getAttribute("idDocument"), Integer.parseInt(price), num, currency);
+                System.out.println(details.toString());
+                mySqlDocuments_has_autoPartsDao.persist(details);
+                if(count==0){
+                    request.setAttribute("message2", "Спасибо за вод необходимых данных");
+                }
+                else request.setAttribute("message2", "Введите данные по оставшимся " + (Integer) session.getAttribute("count") + " автозапчастям");
+
+            }
         }
 
         List<String> listCurrency=new ArrayList<>(2);

@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="SystemOfAutoparts:war exploded">
-    <output-path>$PROJECT_DIR$/target/task5</output-path>
+    <output-path>$PROJECT_DIR$/target/SystemOfAutoparts</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="SystemOfAutoparts/web/Web" />
       <element id="directory" name="WEB-INF">
