@@ -123,7 +123,7 @@
 </div>
 
 <div id="u112" class="ax_text_field">
-    <input id="u112_input" type="text"  name="nameOfCarModel" value=""/>
+    <input id="u112_input" type="text"  name="nameOfCarModel" value="" required/>
 </div>
 
 <div id="u113" class="ax_paragraph">
@@ -178,7 +178,7 @@
 </div>
 
 <div id="u126" class="ax_text_field">
-    <input id="u126_input" type="text" name="nameOfCarModel" value=""/>
+    <input id="u126_input" type="text" name="nameOfCarModel" value="" required/>
 </div>
 
 <div id="u127" class="ax_paragraph">

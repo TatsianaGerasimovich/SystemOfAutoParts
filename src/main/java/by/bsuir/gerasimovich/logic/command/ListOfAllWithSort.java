@@ -9,6 +9,7 @@ import by.bsuir.gerasimovich.dao.mysql.MySqlSelectInAll;
 import by.bsuir.gerasimovich.entity.SelectAll;
 import by.bsuir.gerasimovich.logic.CommandException;
 import by.bsuir.gerasimovich.logic.ICommand;
+import by.bsuir.gerasimovich.logic.ParametrName;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +34,7 @@ public class ListOfAllWithSort implements ICommand {
         for (SelectAll obj: list){
             System.out.println(obj.toString());
         }
-        request.setAttribute("all1", mySqlSelectInAll.getAllSort(sortType));
+        request.setAttribute(ParametrName.ALL1, mySqlSelectInAll.getAllSort(sortType));
         page = JspPageName.LIST_OF_ALL_WITH_SORT;
         return page;
         } catch (FactoryException e) {

@@ -9,6 +9,7 @@ import by.bsuir.gerasimovich.dao.mysql.MySqlSelectInAll;
 import by.bsuir.gerasimovich.entity.SelectAll;
 import by.bsuir.gerasimovich.logic.CommandException;
 import by.bsuir.gerasimovich.logic.ICommand;
+import by.bsuir.gerasimovich.logic.ParametrName;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,10 +30,10 @@ public class Search implements ICommand {
         try {
             mySqlSelectInAll = (MySqlSelectInAll) factory.getDao( SelectAll.class);
 
-        if(whereSearch.equals("notSearch")) {
-            request.setAttribute("all1", mySqlSelectInAll.getAll());
+        if(whereSearch.equals(ParametrName.NOTSEARCH)) {
+            request.setAttribute(ParametrName.ALL1, mySqlSelectInAll.getAll());
         }else{
-            request.setAttribute("all1", mySqlSelectInAll.getAllFilter(whereSearch, whatSearch));
+            request.setAttribute(ParametrName.ALL1, mySqlSelectInAll.getAllFilter(whereSearch, whatSearch));
         }
         page = JspPageName.SEARCH;
         return page;

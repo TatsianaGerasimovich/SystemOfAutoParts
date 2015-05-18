@@ -9,6 +9,7 @@ import by.bsuir.gerasimovich.dao.mysql.MySqlDaoFactory;
 import by.bsuir.gerasimovich.entity.Contractor;
 import by.bsuir.gerasimovich.logic.CommandException;
 import by.bsuir.gerasimovich.logic.ICommand;
+import by.bsuir.gerasimovich.logic.ParametrName;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -63,9 +64,9 @@ public class OperationWithAgent implements ICommand {
         for(int i=1;i<=10;i++){
             listRating.add(i);
         }
-        request.setAttribute("allTypeOfAgent", listType);
-        request.setAttribute("allRating", listRating);
-        request.setAttribute("all1", mySqlContractorDao.getAll());
+        request.setAttribute(ParametrName.ALLTYPEOFAGENT, listType);
+        request.setAttribute(ParametrName.ALLRATING, listRating);
+        request.setAttribute(ParametrName.ALL1, mySqlContractorDao.getAll());
         page = JspPageName.OPERATION_WITH_AGENTS;
         return page;
         } catch (FactoryException e) {

@@ -28,11 +28,17 @@ public class Controller extends HttpServlet{
         super();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-        doPost(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            doPost(request, response);
+        } catch (ServletException e) {
+            log.error("servlet exception",e);
+        } catch (IOException e) {
+            log.error("IO exception", e);
+        }
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String commandName = request.getParameter(RequestParameterName.COMMAND_NAME);
         ICommand command = commandHelper.getCommand(commandName);
         String page = null;
@@ -46,7 +52,8 @@ public class Controller extends HttpServlet{
             log.error("IO exception", ex);
         } catch ( CommandException ex) {
             log.error("Command exception", ex);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher(JspPageName.ERROR_PAGE);
+            rd.forward(request, response);
         }
     }
-
 }

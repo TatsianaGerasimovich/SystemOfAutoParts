@@ -9,7 +9,7 @@ import by.bsuir.gerasimovich.dao.mysql.MySqlSelectInAll;
 import by.bsuir.gerasimovich.entity.SelectAll;
 import by.bsuir.gerasimovich.logic.CommandException;
 import by.bsuir.gerasimovich.logic.ICommand;
-
+import by.bsuir.gerasimovich.logic.ParametrName;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,7 +28,7 @@ public class ListOfAllByBrand implements ICommand {
         try {
             mySqlSelectInAll = (MySqlSelectInAll) factory.getDao( SelectAll.class);
 
-        request.setAttribute("all1",mySqlSelectInAll.getAllFilter("CarBrands.NameBrand", filterType));
+        request.setAttribute(ParametrName.ALL1,mySqlSelectInAll.getAllFilter("CarBrands.NameBrand", filterType));
         page = JspPageName.LIST_OF_ALL_BY_BRAND;
         return page;
         } catch (FactoryException e) {

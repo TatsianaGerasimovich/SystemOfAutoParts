@@ -9,6 +9,7 @@ import by.bsuir.gerasimovich.dao.mysql.MySqlDaoFactory;
 import by.bsuir.gerasimovich.entity.CarBrand;
 import by.bsuir.gerasimovich.logic.CommandException;
 import by.bsuir.gerasimovich.logic.ICommand;
+import by.bsuir.gerasimovich.logic.ParametrName;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,8 +46,8 @@ public class OperationWithBrands implements ICommand {
             CarBrand carBrand=new CarBrand(Integer.valueOf(idCarBrand),"");
             mySqlCarBrandDao.delete(carBrand);
         }
-        request.setAttribute("all1", mySqlCarBrandDao.getAll());
-        request.setAttribute("allBrand", mySqlCarBrandDao.getAll());
+        request.setAttribute(ParametrName.ALL1, mySqlCarBrandDao.getAll());
+        request.setAttribute(ParametrName.ALLBRAND, mySqlCarBrandDao.getAll());
         page = JspPageName.OPERATION_WITH_BRANDS;
         return page;
         } catch (FactoryException e) {

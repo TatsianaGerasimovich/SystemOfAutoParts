@@ -99,7 +99,7 @@
 </div>
 
 <div id="u79" class="ax_text_field">
-    <input id="u79_input" type="text" name="nameOfCarBrand"  value=""/>
+    <input id="u79_input" type="text" name="nameOfCarBrand"  value="" required/>
 </div>
 
 <div id="u80" class="ax_html_button">
@@ -137,7 +137,7 @@
 </div>
 
 <div id="u87" class="ax_text_field">
-    <input id="u87_input" type="text" name="nameOfCarBrand" value=""/>
+    <input id="u87_input" type="text" name="nameOfCarBrand" value="" required/>
 </div>
 
 <div id="u88" class="ax_html_button">

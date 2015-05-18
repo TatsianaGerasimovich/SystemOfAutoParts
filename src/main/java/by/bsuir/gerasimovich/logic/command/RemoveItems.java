@@ -8,6 +8,7 @@ import by.bsuir.gerasimovich.dao.mysql.*;
 import by.bsuir.gerasimovich.entity.*;
 import by.bsuir.gerasimovich.logic.CommandException;
 import by.bsuir.gerasimovich.logic.ICommand;
+import by.bsuir.gerasimovich.logic.ParametrName;
 import by.bsuir.gerasimovich.parser.sax.XmlSaxDaoForDoc;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,13 +45,13 @@ public class RemoveItems implements ICommand {
         mySqlDocuments_has_autoPartsDao=(MySqlDocuments_has_AutoPartsDao) factory.getDao(Documents_has_AutoParts.class);
         mySqlDocumentDao = (MySqlDocumentDao) factory.getDao( Document.class);
             if(typeOfOperation.equals(RequestParameterName.NOTHING)){
-                session.setAttribute("count", -1);
+                session.setAttribute(ParametrName.COUNT, -1);
             }
         if(typeOfOperation.equals(RequestParameterName.REMOVE_AUTOPART)){
             String idOfAutopart = request.getParameter(RequestParameterName.ID_OF_AUTO_PART);
             AutoPart autoPart =new AutoPart(Integer.valueOf(idOfAutopart),"");
             mySqlAutoPartDao.delete(autoPart);
-            request.setAttribute("message1", "Данный вид автозапчасти удалён");
+            request.setAttribute(ParametrName.MESSAGE1, "Данный вид автозапчасти удалён");
         }
 
         if(typeOfOperation.equals(RequestParameterName.REMOVE_BY_FILE)){
@@ -70,9 +71,9 @@ public class RemoveItems implements ICommand {
                     obj.setDocumentId(documentId);
                     mySqlDocuments_has_autoPartsDao.persist(obj);
                 }
-                request.setAttribute("message2", "Накладная введена в базу");
+                request.setAttribute(ParametrName.MESSAGE2, "Накладная введена в базу");
             }
-            else request.setAttribute("message2", "Данный файл не существует");
+            else request.setAttribute(ParametrName.MESSAGE2, "Данный файл не существует");
 
         }
         if(typeOfOperation.equals(RequestParameterName.REMOVE_INVOICE_BY_KEYBOARD)){
@@ -93,17 +94,17 @@ public class RemoveItems implements ICommand {
             Document document = new Document(idDocument,Integer.parseInt(idOfAgent),"shipment of invoice",new java.sql.Date(docDate.getTime()));
             System.out.println(document.toString());
             mySqlDocumentDao.persist(document);
-            request.setAttribute("message3", "Введите данные по оставшимся "+(Integer) session.getAttribute("count")+" автозапчастям");
+            request.setAttribute(ParametrName.MESSAGE3, "Введите данные по оставшимся "+(Integer) session.getAttribute("count")+" автозапчастям");
         }
         if(typeOfOperation.equals(RequestParameterName.REMOVE_DETAILS_BY_KEYBOARD)){
             int count=(Integer) session.getAttribute("count");
             if(count==-1){
-                request.setAttribute("error", "Извинете, необходимо ввести сначала данные об накладной");
+                request.setAttribute(ParametrName.ERROR, "Извинете, необходимо ввести сначала данные об накладной");
                 page = JspPageName.ERROR_PAGE;
                 return page;
             }
             else if(count==0){
-                request.setAttribute("message2", "Все данные уже введены");
+                request.setAttribute(ParametrName.MESSAGE2, "Все данные уже введены");
             }
             else {
                 count--;
@@ -117,9 +118,9 @@ public class RemoveItems implements ICommand {
                 System.out.println(details.toString());
                 mySqlDocuments_has_autoPartsDao.persist(details);
                 if(count==0){
-                    request.setAttribute("message2", "Спасибо за вод необходимых данных");
+                    request.setAttribute(ParametrName.MESSAGE2, "Спасибо за вод необходимых данных");
                 }
-                else request.setAttribute("message2", "Введите данные по оставшимся " + (Integer) session.getAttribute("count") + " автозапчастям");
+                else request.setAttribute(ParametrName.MESSAGE2, "Введите данные по оставшимся " + (Integer) session.getAttribute("count") + " автозапчастям");
 
             }
         }
@@ -130,9 +131,9 @@ public class RemoveItems implements ICommand {
         listCurrency.add("EUR");
         listCurrency.add("BYR");
 
-        request.setAttribute("allCurrency", listCurrency);
-        request.setAttribute("allAutoParts", mySqlAutoPartDao.getAll());
-        request.setAttribute("allAgent", mySqlContractorDao.getAll());
+        request.setAttribute(ParametrName.ALLCURRENCY, listCurrency);
+        request.setAttribute(ParametrName.ALLAUTOPARTS, mySqlAutoPartDao.getAll());
+        request.setAttribute(ParametrName.ALLAGENT, mySqlContractorDao.getAll());
         page = JspPageName.REMOVE_ITEMS;
         return page;
         } catch (FactoryException e) {

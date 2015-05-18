@@ -111,7 +111,7 @@
 </div>
 
 <div id="u145" class="ax_text_field">
-    <input name="nameOfAgent" id="u145_input" type="text" value=""/>
+    <input name="nameOfAgent" id="u145_input" type="text" value="" required/>
 </div>
 
 <div id="u146" class="ax_html_button">
@@ -127,7 +127,7 @@
 </div>
 
 <div id="u149" class="ax_text_field">
-    <input id="u149_input" type="text" name="addressOfAgent" value=""/>
+    <input id="u149_input" type="text" name="addressOfAgent" value="" required/>
 </div>
 
 <div id="u150" class="ax_paragraph">
@@ -139,7 +139,7 @@
 </div>
 
 <div id="u152" class="ax_text_field">
-    <input id="u152_input" pattern="[0-9]+" type="text" name="phoneOfAgent" value=""/>
+    <input id="u152_input" pattern="[0-9]+" type="text" name="phoneOfAgent" value="" required/>
 </div>
 <div id="u169" class="ax_paragraph">
     <img id="u169_img" class="img " src="jsp/accessories/resources/images/transparent.gif"/>
@@ -230,7 +230,7 @@
     </div>
 
     <div id="u177" class="ax_text_field">
-        <input id="u177_input" name="nameOfAgent" type="text" value=""/>
+        <input id="u177_input" name="nameOfAgent" type="text" value="" required/>
     </div>
 
     <div id="u178" class="ax_paragraph">
@@ -242,7 +242,7 @@
     </div>
 
     <div id="u180" class="ax_text_field">
-        <input id="u180_input" type="text" name="addressOfAgent" value=""/>
+        <input id="u180_input" type="text" name="addressOfAgent" value="" required/>
     </div>
 
     <div id="u181" class="ax_paragraph">
@@ -254,7 +254,7 @@
     </div>
 
     <div id="u183" class="ax_text_field">
-        <input id="u183_input"  pattern="[0-9]+" type="text" name="phoneOfAgent" value=""/>
+        <input id="u183_input"  pattern="[0-9]+" type="text" name="phoneOfAgent" value="" required/>
     </div>
 
     <div id="u184" class="ax_paragraph">

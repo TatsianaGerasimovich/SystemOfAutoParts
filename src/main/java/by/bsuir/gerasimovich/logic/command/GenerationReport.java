@@ -9,6 +9,7 @@ import by.bsuir.gerasimovich.dao.mysql.MySqlSelectInAll;
 import by.bsuir.gerasimovich.entity.SelectAll;
 import by.bsuir.gerasimovich.logic.CommandException;
 import by.bsuir.gerasimovich.logic.ICommand;
+import by.bsuir.gerasimovich.logic.ParametrName;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,19 +36,19 @@ public class GenerationReport implements ICommand {
 
         if(typeOfReport.equals(RequestParameterName.REPORT_OF_ALL_AUTOPARTS)){
             generateReportOfAll();
-            request.setAttribute("reportAll1","Отчёт создан");
+            request.setAttribute(ParametrName.REPORTALL1,"Отчёт создан");
 
         }
         if(typeOfReport.equals(RequestParameterName.REPORT_OF_ALL_SCARCE)){
             generateReportOfScarce();
-            request.setAttribute("reportAll2","Отчёт создан");
+            request.setAttribute(ParametrName.REPORTALL2,"Отчёт создан");
         }
         if(typeOfReport.equals(RequestParameterName.REPORT_OF_RESIDUES_IN_STOCK)){
             generateReportOfResiduesInStock(request, response);
-            request.setAttribute("reportAll3","Отчёт создан");
+            request.setAttribute(ParametrName.REPORTALL3,"Отчёт создан");
         }
 
-        request.setAttribute("allAutoParts",mySqlSelectInAll.getAll());
+        request.setAttribute(ParametrName.ALLAUTOPARTS,mySqlSelectInAll.getAll());
         page = JspPageName.GENERATION_REPORT;
         return page;
         } catch (FactoryException e) {

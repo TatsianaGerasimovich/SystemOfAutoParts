@@ -11,6 +11,7 @@ import by.bsuir.gerasimovich.entity.CarBrand;
 import by.bsuir.gerasimovich.entity.CarModel;
 import by.bsuir.gerasimovich.logic.CommandException;
 import by.bsuir.gerasimovich.logic.ICommand;
+import by.bsuir.gerasimovich.logic.ParametrName;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,8 +60,8 @@ public class OperationWithModel implements ICommand {
             CarModel carModel=new CarModel(Integer.valueOf(idCarModel),Integer.valueOf(idCarBrand),"",0);
             mySqlCarModelDao.delete(carModel);
         }
-        request.setAttribute("all1", mySqlCarModelDao.getAll());
-        request.setAttribute("allBrand", mySqlCarBrandDao.getAll());
+        request.setAttribute(ParametrName.ALL1, mySqlCarModelDao.getAll());
+        request.setAttribute(ParametrName.ALLBRAND, mySqlCarBrandDao.getAll());
         List<CarModel> list=mySqlCarModelDao.getAll();
         List<CarBrand> listBrand=new ArrayList<>(list.size());
         for(CarModel obj : list){
@@ -71,9 +72,9 @@ public class OperationWithModel implements ICommand {
         for(int i=1930;i<=getCurrentYear();i++){
             listYears.add(i);
         }
-        request.setAttribute("allModel", mySqlCarModelDao.getAll());
-        request.setAttribute("allBrandByModel", listBrand);
-        request.setAttribute("allYears", listYears);
+        request.setAttribute(ParametrName.ALLMODEL, mySqlCarModelDao.getAll());
+        request.setAttribute(ParametrName.ALLBRANDBYMODEL, listBrand);
+        request.setAttribute(ParametrName.ALLYEARS, listYears);
         page = JspPageName.OPERATION_WITH_MODELS;
         return page;
         } catch (FactoryException e) {
